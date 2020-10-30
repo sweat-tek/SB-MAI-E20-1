@@ -164,7 +164,7 @@ public abstract class AlignAction extends AbstractSelectedAction {
 
         @Override
         protected Point2D getTranslate(Rectangle2D.Double selectionBounds, Rectangle2D.Double figureBounds) {
-            return new Point2D.Double(0, (selectionBounds.y + selectionBounds.height / 2) - (figureBounds.height / 2));
+            return new Point2D.Double(0, (selectionBounds.y + selectionBounds.height / 2) - figureBounds.y - (figureBounds.height / 2));
         }
         
     }
