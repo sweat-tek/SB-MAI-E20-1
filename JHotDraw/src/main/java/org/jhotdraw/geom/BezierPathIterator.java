@@ -128,13 +128,13 @@ public class BezierPathIterator implements PathIterator {
                 BezierPath.Node current = path.get(0);
 
                 if ((previous.mask & BezierPath.C2_MASK) == 0) {
-                    
+
                     SegmentSeperator segSep = new SegmentSeperator();
                     segSep.lineToOrQuadto(coords, current, numCoords, type);
                     numCoords = segSep.getNumCoords();
                     type = segSep.getType();
                     coords = segSep.getFloatCoords();
-                    
+
                     /* this is now handled in the Segment Seperator
                     if ((current.mask & BezierPath.C1_MASK) == 0) {
                         numCoords = 1;
@@ -149,16 +149,15 @@ public class BezierPathIterator implements PathIterator {
                         coords[2] = (float) current.x[0];
                         coords[3] = (float) current.y[0];
                     }
-                    */
-                    
+                     */
                 } else {
-                    
+
                     SegmentSeperator segSep = new SegmentSeperator();
                     segSep.quadtoOrCubicto(coords, current, previous, numCoords, type);
                     numCoords = segSep.getNumCoords();
                     type = segSep.getType();
                     coords = segSep.getFloatCoords();
-                    
+
                     /*This is now handled in Segment Seperator
                     if ((current.mask & BezierPath.C1_MASK) == 0) {
                         numCoords = 2;
@@ -177,7 +176,7 @@ public class BezierPathIterator implements PathIterator {
                         coords[4] = (float) current.x[0];
                         coords[5] = (float) current.y[0];
                     }
-                    */
+                     */
                 }
             }
         } else if (index > path.size()) {
@@ -195,13 +194,13 @@ public class BezierPathIterator implements PathIterator {
             BezierPath.Node previous = path.get(index - 1);
 
             if ((previous.mask & BezierPath.C2_MASK) == 0) {
-                
+
                 SegmentSeperator segSep = new SegmentSeperator();
                 segSep.lineToOrQuadto(coords, current, numCoords, type);
                 type = segSep.getType();
                 numCoords = segSep.getNumCoords();
                 coords = segSep.getFloatCoords();
-                
+
                 /* This is now handled by Segment Seperation
                 if ((current.mask & BezierPath.C1_MASK) == 0) {
                     numCoords = 1;
@@ -217,15 +216,15 @@ public class BezierPathIterator implements PathIterator {
                     coords[2] = (float) current.x[0];
                     coords[3] = (float) current.y[0];
                 }
-                */
+                 */
             } else {
-                
+
                 SegmentSeperator segSep = new SegmentSeperator();
                 segSep.quadtoOrCubicto(coords, current, previous, numCoords, type);
                 numCoords = segSep.getNumCoords();
                 type = segSep.getType();
                 coords = segSep.getFloatCoords();
-                
+
                 // This is now handled inside the Segment Seperator
                 /*
                 if ((current.mask & BezierPath.C1_MASK) == 0) {
@@ -245,7 +244,7 @@ public class BezierPathIterator implements PathIterator {
                     coords[4] = (float) current.x[0];
                     coords[5] = (float) current.y[0];
                 }
-                */
+                 */
             }
         }
 
@@ -285,6 +284,12 @@ public class BezierPathIterator implements PathIterator {
                 BezierPath.Node current = path.get(0);
 
                 if ((previous.mask & BezierPath.C2_MASK) == 0) {
+                    SegmentSeperator segSep = new SegmentSeperator();
+                    segSep.lineToOrQuadto(coords, current, numCoords, type);
+                    numCoords = segSep.getNumCoords();
+                    type = segSep.getType();
+                    coords = segSep.getDoubleCoords();
+                    /*
                     if ((current.mask & BezierPath.C1_MASK) == 0) {
                         numCoords = 1;
                         type = SEG_LINETO;
@@ -298,7 +303,15 @@ public class BezierPathIterator implements PathIterator {
                         coords[2] = current.x[0];
                         coords[3] = current.y[0];
                     }
+                     */
                 } else {
+                    SegmentSeperator segSep = new SegmentSeperator();
+                    segSep.quadtoOrCubicto(coords, current, previous, numCoords, type);
+                    numCoords = segSep.getNumCoords();
+                    type = segSep.getType();
+                    coords = segSep.getDoubleCoords();
+
+                    /*
                     if ((current.mask & BezierPath.C1_MASK) == 0) {
                         numCoords = 2;
                         type = SEG_QUADTO;
@@ -316,6 +329,7 @@ public class BezierPathIterator implements PathIterator {
                         coords[4] = current.x[0];
                         coords[5] = current.y[0];
                     }
+                     */
                 }
             }
         } else if (index > path.size()) {
@@ -333,6 +347,12 @@ public class BezierPathIterator implements PathIterator {
             BezierPath.Node previous = path.get(index - 1);
 
             if ((previous.mask & BezierPath.C2_MASK) == 0) {
+                SegmentSeperator segSep = new SegmentSeperator();
+                segSep.lineToOrQuadto(coords, current, numCoords, type);
+                numCoords = segSep.getNumCoords();
+                type = segSep.getType();
+                coords = segSep.getDoubleCoords();
+                /*
                 if ((current.mask & BezierPath.C1_MASK) == 0) {
                     numCoords = 1;
                     type = SEG_LINETO;
@@ -347,7 +367,14 @@ public class BezierPathIterator implements PathIterator {
                     coords[2] = current.x[0];
                     coords[3] = current.y[0];
                 }
+                 */
             } else {
+                SegmentSeperator segSep = new SegmentSeperator();
+                segSep.quadtoOrCubicto(coords, current, previous, numCoords, type);
+                numCoords = segSep.getNumCoords();
+                type = segSep.getType();
+                coords = segSep.getDoubleCoords();
+                /*
                 if ((current.mask & BezierPath.C1_MASK) == 0) {
                     numCoords = 2;
                     type = SEG_QUADTO;
@@ -365,6 +392,7 @@ public class BezierPathIterator implements PathIterator {
                     coords[4] = current.x[0];
                     coords[5] = current.y[0];
                 }
+                 */
             }
         }
 
