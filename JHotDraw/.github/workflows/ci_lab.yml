@@ -3,8 +3,8 @@
 # Configure the *.yml to execute tests automatically.
 
 name: Java CI
-# Run this workflow every time a new commit pushed to your repository
-on: [push]
+# Run this workflow every time we do a pull request in our repository
+on: [pull_request]
 
 jobs:
   build:
