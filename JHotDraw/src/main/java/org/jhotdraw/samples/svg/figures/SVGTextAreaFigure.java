@@ -197,18 +197,10 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
 
         Rectangle2D.Double paragraphBounds = new Rectangle2D.Double(leftMargin, verticalPos, 0, 0);
 
-        int[] tabLocations = new int[tabCount + 1];
-
-        int i = 0;
-        for (char c = styledText.first(); c != styledText.DONE; c = styledText.next()) {
-            if (c == '\t') {
-                tabLocations[i++] = styledText.getIndex();
-            }
-        }
-        tabLocations[tabCount] = styledText.getEndIndex() - 1;
+        int[] tabLocations = createTabLocations(styledText, tabCount);
 
         // Now tabLocations has an entry for every tab's offset in
-        // the text.  For convenience, the last entry is tabLocations
+        // the text. For convenience, the last entry is tabLocations
         // is the offset of the last character in the text.
 
         LineBreakMeasurer measurer = new LineBreakMeasurer(styledText, getFontRenderContext());
@@ -278,23 +270,12 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
 
             Iterator<TextLayout> layoutEnum = layouts.iterator();
             Iterator<Float> positionEnum = penPositions.iterator();
+            Iterator<TextLayout> layoutEnum2 = layouts.iterator();
+            Iterator<Float> positionEnum2 = penPositions.iterator();
 
             // now iterate through layouts and draw them
-            while (layoutEnum.hasNext()) {
-                TextLayout nextLayout = layoutEnum.next();
-                float nextPosition = positionEnum.next();
-                AffineTransform tx = new AffineTransform();
-                tx.translate(nextPosition, verticalPos);
-                if (shape != null) {
-                    Shape outline = nextLayout.getOutline(tx);
-                    shape.append(outline, false);
-                }
-                Rectangle2D layoutBounds = nextLayout.getBounds();
-                paragraphBounds.add(new Rectangle2D.Double(layoutBounds.getX() + nextPosition,
-                        layoutBounds.getY() + verticalPos,
-                        layoutBounds.getWidth(),
-                        layoutBounds.getHeight()));
-            }
+            shape = createShape(layoutEnum, positionEnum, verticalPos, shape);
+            paragraphBounds = createParagraphBounds(layoutEnum2,positionEnum2,verticalPos,paragraphBounds);
 
             verticalPos += maxDescent;
         }
@@ -602,5 +583,48 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
         that.bounds = (Rectangle2D.Double) this.bounds.clone();
         return that;
     }
+
+    private int[] createTabLocations(AttributedCharacterIterator styledText, int tabCount) {
+      int[] tabLocations = new int[tabCount + 1];
+
+        int i = 0;
+        for (char c = styledText.first(); c != styledText.DONE; c = styledText.next()) {
+            if (c == '\t') {
+                tabLocations[i++] = styledText.getIndex();
+            }
+        }
+        tabLocations[tabCount] = styledText.getEndIndex() - 1;
+        
+        return tabLocations;
+    }
+
+    private GeneralPath createShape(Iterator<TextLayout> layoutEnum, Iterator<Float> positionEnum, float verticalPos, GeneralPath shape) {
+       while (layoutEnum.hasNext()) {
+                TextLayout nextLayout = layoutEnum.next();
+                float nextPosition = positionEnum.next();
+                AffineTransform tx = new AffineTransform();
+                tx.translate(nextPosition, verticalPos);
+                if (shape != null) {
+                    Shape outline = nextLayout.getOutline(tx);
+                    shape.append(outline, false);
+                }
+            }
+       return shape;
+    }
+
+    private Rectangle2D.Double createParagraphBounds(Iterator<TextLayout> layoutEnum, Iterator<Float> positionEnum, float verticalPos, Rectangle2D.Double paragraphBounds) {
+        while (layoutEnum.hasNext()) {
+                TextLayout nextLayout = layoutEnum.next();
+                float nextPosition = positionEnum.next();
+                Rectangle2D layoutBounds = nextLayout.getBounds();
+                paragraphBounds.add(new Rectangle2D.Double(layoutBounds.getX() + nextPosition,
+                        layoutBounds.getY() + verticalPos,
+                        layoutBounds.getWidth(),
+                        layoutBounds.getHeight()));
+            } 
+        return paragraphBounds;
+    }
+
+
 }
 
