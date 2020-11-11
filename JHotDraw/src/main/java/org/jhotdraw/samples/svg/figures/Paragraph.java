@@ -23,15 +23,16 @@ import org.jhotdraw.app.JHotDrawFeatures;
  * @author askel
  */
 public class Paragraph {
-    GeneralPath shape;
-    AttributedCharacterIterator styledText;
-    float verticalPos;
-    float maxVerticalPos;
-    float leftMargin;
-    float rightMargin;
-    float[] tabStops; 
-    int tabCount;
-    FontRenderContext fontRenderContext;
+    private GeneralPath shape;
+    private AttributedCharacterIterator styledText;
+    private float verticalPos;
+    private float maxVerticalPos;
+    private float leftMargin;
+    private float rightMargin;
+    private float[] tabStops; 
+    private int tabCount;
+    private FontRenderContext fontRenderContext;
+    private float maxAscent = 0, maxDescent = 0;
     
     /**
      * Appends a paragraph of text at the specified y location and returns
@@ -71,80 +72,20 @@ public class Paragraph {
 
         // assume styledText is an AttributedCharacterIterator, and the number
         // of tabs in styledText is tabCount
-
         Rectangle2D.Double paragraphBounds = new Rectangle2D.Double(leftMargin, verticalPos, 0, 0);
 
-        int[] tabLocations = createTabLocations(styledText, tabCount);
-
-        // Now tabLocations has an entry for every tab's offset in
-        // the text. For convenience, the last entry is tabLocations
-        // is the offset of the last character in the text.
-
         LineBreakMeasurer measurer = new LineBreakMeasurer(styledText, fontRenderContext);
-        int currentTab = 0;
 
         while (measurer.getPosition() < styledText.getEndIndex()) {
 
-            // Lay out and draw each line.  All segments on a line
-            // must be computed before any drawing can occur, since
-            // we must know the largest ascent on the line.
-            // TextLayouts are computed and stored in a List;
-            // their horizontal positions are stored in a parallel
-            // List.
-
-            // lineContainsText is true after first segment is drawn
-            boolean lineContainsText = false;
-            boolean lineComplete = false;
-            float maxAscent = 0, maxDescent = 0;
-            float horizontalPos = leftMargin;
             LinkedList<TextLayout> layouts = new LinkedList<TextLayout>();
             LinkedList<Float> penPositions = new LinkedList<Float>();
-
-            while (!lineComplete) {
-                float wrappingWidth = rightMargin - horizontalPos;
-                TextLayout layout = null;
-                layout =
-                        measurer.nextLayout(wrappingWidth,
-                        tabLocations[currentTab] + 1,
-                        lineContainsText);
-
-                // layout can be null if lineContainsText is true
-                if (layout != null) {
-                    layouts.add(layout);
-                    penPositions.add(horizontalPos);
-                    horizontalPos += layout.getAdvance();
-                    maxAscent = Math.max(maxAscent, layout.getAscent());
-                    maxDescent = Math.max(maxDescent,
-                            layout.getDescent() + layout.getLeading());
-                } else {
-                    lineComplete = true;
-                }
-
-                lineContainsText = true;
-
-                if (measurer.getPosition() == tabLocations[currentTab] + 1) {
-                    currentTab++;
-                }
-
-                if (measurer.getPosition() == styledText.getEndIndex()) {
-                    lineComplete = true;
-                } else if (tabStops.length == 0 || horizontalPos >= tabStops[tabStops.length - 1]) {
-                    lineComplete = true;
-                }
-                if (!lineComplete) {
-                    // move to next tab stop
-                    int j;
-                    for (j = 0; horizontalPos >= tabStops[j]; j++) {
-                    }
-                    horizontalPos = tabStops[j];
-                }
-            }
-
+            
+            createLayouts(layouts,penPositions,measurer);
             verticalPos += maxAscent;
             if (verticalPos > maxVerticalPos) {
                 break;
             }
-
             Iterator<TextLayout> layoutEnum = layouts.iterator();
             Iterator<Float> positionEnum = penPositions.iterator();
             Iterator<TextLayout> layoutEnum2 = layouts.iterator();
@@ -199,5 +140,59 @@ public class Paragraph {
                         layoutBounds.getHeight()));
             } 
         return paragraphBounds;
+    }
+            // Lay out and draw each line.  All segments on a line
+            // must be computed before any drawing can occur, since
+            // we must know the largest ascent on the line.
+            // TextLayouts are computed and stored in a List;
+            // their horizontal positions are stored in a parallel
+            // List.
+            // lineContainsText is true after first segment is drawn
+    private void createLayouts(LinkedList<TextLayout> layouts, LinkedList<Float> penPositions,
+                                LineBreakMeasurer measurer) {
+        int[] tabLocations = createTabLocations(styledText, tabCount);
+        int currentTab = 0;
+        boolean lineContainsText = false;
+        boolean lineComplete = false;
+        float horizontalPos = leftMargin;
+        while (!lineComplete) {
+                float wrappingWidth = rightMargin - horizontalPos;
+                TextLayout layout = null;
+                layout =
+                        measurer.nextLayout(wrappingWidth,
+                        tabLocations[currentTab] + 1,
+                        lineContainsText);
+
+                // layout can be null if lineContainsText is true
+                if (layout != null) {
+                    layouts.add(layout);
+                    penPositions.add(horizontalPos);
+                    horizontalPos += layout.getAdvance();
+                    maxAscent = Math.max(maxAscent, layout.getAscent());
+                    maxDescent = Math.max(maxDescent,
+                            layout.getDescent() + layout.getLeading());
+                } else {
+                    lineComplete = true;
+                }
+
+                lineContainsText = true;
+
+                if (measurer.getPosition() == tabLocations[currentTab] + 1) {
+                    currentTab++;
+                }
+
+                if (measurer.getPosition() == styledText.getEndIndex()) {
+                    lineComplete = true;
+                } else if (tabStops.length == 0 || horizontalPos >= tabStops[tabStops.length - 1]) {
+                    lineComplete = true;
+                }
+                if (!lineComplete) {
+                    // move to next tab stop
+                    int j;
+                    for (j = 0; horizontalPos >= tabStops[j]; j++) {
+                    }
+                    horizontalPos = tabStops[j];
+                }
+            }
     }
 }
