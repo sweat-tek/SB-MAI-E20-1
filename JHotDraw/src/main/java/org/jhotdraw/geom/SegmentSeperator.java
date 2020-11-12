@@ -20,6 +20,10 @@ public class SegmentSeperator implements PathIterator {
     }
 
     public void lineToOrQuadto(float[] coords, BezierPath.Node current, int numCoords, int type) {
+        System.out.println("Coords: " + coords + " BezierPath Node: " + current + " numcoords: " + numCoords + " type: " + type);
+        for(int i = 0; i < coords.length; i++) {
+            System.out.println("coord " + coords[i]);
+        }
             
         if ((current.mask & BezierPath.C1_MASK) == 0) {
                         numCoords = 1;
@@ -42,7 +46,10 @@ public class SegmentSeperator implements PathIterator {
     }
 
     public void quadtoOrCubicto(float[] coords, BezierPath.Node current, BezierPath.Node previous, int numCoords, int type) {
-        
+        System.out.println("Coords: " + coords + " BezierPath Node: " + current + " Previous: " + previous + " numcoords: " + numCoords + " type: " + type);
+        for(int i = 0; i < coords.length; i++) {
+            System.out.println("coord " + coords[i]);
+        }
         if ((current.mask & BezierPath.C1_MASK) == 0) {
             numCoords = 2;
             type = SEG_QUADTO;
