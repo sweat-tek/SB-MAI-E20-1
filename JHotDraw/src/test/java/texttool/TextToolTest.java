@@ -1,13 +1,11 @@
 package texttool;
 
-import org.jhotdraw.draw.AttributeKey;
 import org.jhotdraw.samples.svg.figures.SVGTextFigure;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -34,21 +32,21 @@ public class TextToolTest {
     @Test
     public void testCoordinatesChangedAfterMovingTheText() {
         Point2D.Double[] coordinates = svgTextFigure.getCoordinates();
-        svgTextFigure.setCoordinates(new Point2D.Double[]{new Point2D.Double(0,0)});
-        assertNotEquals("Testing text coordinates after moving it",coordinates,svgTextFigure.getCoordinates());
+        svgTextFigure.setCoordinates(new Point2D.Double[]{new Point2D.Double(0, 0)});
+        assertNotEquals("Testing text coordinates after moving it", coordinates, svgTextFigure.getCoordinates());
     }
 
     @Test
     public void testFontSize() {
         float fontSize = svgTextFigure.getFontSize();
         svgTextFigure.setFontSize(Float.MAX_VALUE);
-        assertNotEquals("Testing font size to ensure change",fontSize,svgTextFigure.getFontSize());
+        assertNotEquals("Testing font size to ensure change", fontSize, svgTextFigure.getFontSize());
     }
 
     @Test
     public void testTextColor() {
         Color textColor = svgTextFigure.getTextColor();
         assert textColor != null;
-        assertEquals("Testing default color for text",Color.black,textColor);
+        assertEquals("Testing default color for text", Color.black, textColor);
     }
 }
