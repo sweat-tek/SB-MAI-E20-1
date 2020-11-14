@@ -1753,7 +1753,6 @@ public class SVGInputFormat implements InputFormat {
                     path.arcTo(rx, ry, xAxisRotation, largeArcFlag, sweepFlag, p.x, p.y);
 
                     nextCommand = 'A';
-                    break;
                 }
                 case 'a': {
                     // absolute-elliptical-arc rx ry x-axis-rotation large-arc-flag sweep-flag x y
