@@ -201,6 +201,16 @@ public class QuadTreeDrawing extends AbstractDrawing {
                 return sort(c);
         }
     }
+    
+        @Override
+    public Figure findFigureBehind(Point2D.Double p, Collection<? extends Figure> children) {
+        return super.findFigureBehind(p, children); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Figure findFigureBehind(Point2D.Double p, Figure figure) {
+        return super.findFigureBehind(p, figure); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public java.util.List<Figure> findFiguresWithin(Rectangle2D.Double bounds) {
         LinkedList<Figure> contained = new LinkedList<Figure>();
