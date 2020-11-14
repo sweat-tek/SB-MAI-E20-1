@@ -1717,8 +1717,44 @@ public class SVGInputFormat implements InputFormat {
 
                     break;
 
-                case 'A': 
+                case 'A': {
+                    // absolute-elliptical-arc rx ry x-axis-rotation large-arc-flag sweep-flag x y
+                    if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
+                        throw new IOException("rx coordinate missing for 'A' at position " + tt.getStartPosition() + " in " + str);
+                    }
+                    // If rX or rY have negative signs, these are dropped;
+                    // the absolute value is used instead.
+                    double rx = tt.nval;
+                    if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
+                        throw new IOException("ry coordinate missing for 'A' at position " + tt.getStartPosition() + " in " + str);
+                    }
+                    double ry = tt.nval;
+                    if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
+                        throw new IOException("x-axis-rotation missing for 'A' at position " + tt.getStartPosition() + " in " + str);
+                    }
+                    double xAxisRotation = tt.nval;
+                    if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
+                        throw new IOException("large-arc-flag missing for 'A' at position " + tt.getStartPosition() + " in " + str);
+                    }
+                    boolean largeArcFlag = tt.nval != 0;
+                    if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
+                        throw new IOException("sweep-flag missing for 'A' at position " + tt.getStartPosition() + " in " + str);
+                    }
+                    boolean sweepFlag = tt.nval != 0;
+                    if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
+                        throw new IOException("x coordinate missing for 'A' at position " + tt.getStartPosition() + " in " + str);
+                    }
+                    p.x = tt.nval;
+                    if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
+                        throw new IOException("y coordinate missing for 'A' at position " + tt.getStartPosition() + " in " + str);
+                    }
+                    p.y = tt.nval;
+
+                    path.arcTo(rx, ry, xAxisRotation, largeArcFlag, sweepFlag, p.x, p.y);
+
                     nextCommand = 'A';
+                    break;
+                }
                 case 'a': {
                     // absolute-elliptical-arc rx ry x-axis-rotation large-arc-flag sweep-flag x y
                     if (tt.nextToken() != StreamPosTokenizer.TT_NUMBER) {
@@ -1775,7 +1811,6 @@ public class SVGInputFormat implements InputFormat {
     /* Reads core attributes as listed in
      * http://www.w3.org/TR/SVGMobile12/feature.html#CoreAttribute
      */
-
     private void readCoreAttributes(IXMLElement elem, HashMap<AttributeKey, Object> a)
             throws IOException {
         // read "id" or "xml:id"
@@ -1828,7 +1863,6 @@ public class SVGInputFormat implements InputFormat {
     /* Reads text attributes as listed in
      * http://www.w3.org/TR/SVGMobile12/feature.html#Text
      */
-
     private void readTextAttributes(IXMLElement elem, Map<AttributeKey, Object> a)
             throws IOException {
         Object value;
@@ -1884,7 +1918,6 @@ public class SVGInputFormat implements InputFormat {
     /* Reads text flow attributes as listed in
      * http://www.w3.org/TR/SVGMobile12/feature.html#TextFlow
      */
-
     private void readTextFlowAttributes(IXMLElement elem, HashMap<AttributeKey, Object> a)
             throws IOException {
         Object value;
@@ -1908,7 +1941,6 @@ public class SVGInputFormat implements InputFormat {
     /* Reads the transform attribute as specified in
      * http://www.w3.org/TR/SVGMobile12/coords.html#TransformAttribute
      */
-
     private void readTransformAttribute(IXMLElement elem, HashMap<AttributeKey, Object> a)
             throws IOException {
         String value;
@@ -1920,7 +1952,6 @@ public class SVGInputFormat implements InputFormat {
 
     /* Reads solid color attributes.
      */
-
     private void readSolidColorElement(IXMLElement elem)
             throws IOException {
         HashMap<AttributeKey, Object> a = new HashMap<AttributeKey, Object>();
@@ -2155,7 +2186,6 @@ public class SVGInputFormat implements InputFormat {
 
     /* Reads shape attributes for the SVG "use" element.
      */
-
     private void readUseShapeAttributes(IXMLElement elem, HashMap<AttributeKey, Object> a)
             throws IOException {
         Object objectValue;
@@ -2567,7 +2597,6 @@ public class SVGInputFormat implements InputFormat {
 
     /* Reads viewport attributes.
      */
-
     private void readViewportAttributes(IXMLElement elem, HashMap<AttributeKey, Object> a)
             throws IOException {
         Object value;
@@ -2618,7 +2647,6 @@ public class SVGInputFormat implements InputFormat {
     /* Reads graphics attributes as listed in
      * http://www.w3.org/TR/SVGMobile12/feature.html#GraphicsAttribute
      */
-
     private void readGraphicsAttributes(IXMLElement elem, Figure f)
             throws IOException {
         Object value;
@@ -2897,7 +2925,6 @@ public class SVGInputFormat implements InputFormat {
     /* Reads font attributes as listed in
      * http://www.w3.org/TR/SVGMobile12/feature.html#Font
      */
-
     private void readFontAttributes(IXMLElement elem, Map<AttributeKey, Object> a)
             throws IOException {
         String value;
@@ -3148,7 +3175,6 @@ public class SVGInputFormat implements InputFormat {
      * as specified in
      * http://www.w3.org/TR/SVGMobile12/coords.html#TransformAttribute
      */
-
     public static AffineTransform toTransform(IXMLElement elem, String str) throws IOException {
         AffineTransform t = new AffineTransform();
 
