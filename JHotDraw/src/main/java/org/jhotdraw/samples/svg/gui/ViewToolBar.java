@@ -42,6 +42,7 @@ public class ViewToolBar extends AbstractToolBar {
 
     private DrawingView view;
     private int state;
+    ResourceBundleUtil labels;
 
     public void setState(int state) {
         this.state = state;
@@ -51,7 +52,7 @@ public class ViewToolBar extends AbstractToolBar {
      * Creates new instance.
      */
     public ViewToolBar() {
-        ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
+        labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
         setName(labels.getString(getID() + ".toolbar"));
         setDisclosureStateCount(3);
     }
@@ -64,50 +65,27 @@ public class ViewToolBar extends AbstractToolBar {
         constrainer.setWidth(prefs.getDouble("view.gridSize", 8d));
     }
 
-    private void addGridButton(ResourceBundleUtil labels, JPanel p) {
-        AbstractButton btn;
-        btn = ButtonFactory.createToggleGridButton(view);
-        btn.setUI((PaletteButtonUI) PaletteButtonUI.createUI(btn));
-        labels.configureToolBarButton(btn, "alignGrid");
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        p.add(btn, gbc);
-    }
+    @Override
+    @FeatureEntryPoint(JHotDrawFeatures.VIEW_PALETTE)
+    protected JComponent createDisclosedComponent(int state) {
+        JPanel p = null;
+        setState(state);
 
-    private void addZoomButton(ResourceBundleUtil labels, JPanel p) {
-        AbstractButton btn, toggleGridButton;
-        toggleGridButton = btn = ButtonFactory.createZoomButton(view);
-        
-        if(state == 2){
-            GridBagConstraints gbc;
-                gbc = new GridBagConstraints();
-                gbc.gridx = 0;
-                gbc.gridy = 1;
-                p.add(makeScaleFactorField(labels), gbc);
+        if (state == 1 || state == 2) {
+            p = makeNewJPanel(p);
+
+            // add buttons
+            addGridButton(p);
+            addZoomButton(p);
+
+            if (state == 2) {
+                makeGridSizeField(p);
+                makeScaleFactorField(p);
+            }
+
+            return p;
         }
-        
-        btn.setUI((PaletteButtonUI) PaletteButtonUI.createUI(btn));
-        labels.configureToolBarButton(btn, "view.zoomFactor");
-        btn.setText("100 %");
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gbc.insets = new Insets(3, 0, 0, 0);
-        gbc.weighty = 1;
-        gbc.weightx = 1;
-        if (state == 1) {
-            btn.setPreferredSize(new Dimension(btn.getPreferredSize().width, toggleGridButton.getPreferredSize().height));
-        } else if (state == 2){
-            btn.setPreferredSize(new Dimension(btn.getPreferredSize().width, makeScaleFactorField(labels).getPreferredSize().height));
-        }
-        p.add(btn, gbc);
+        return p;
     }
 
     private JPanel makeNewJPanel(JPanel p) {
@@ -120,29 +98,40 @@ public class ViewToolBar extends AbstractToolBar {
         return p;
     }
 
-    @Override
-    @FeatureEntryPoint(JHotDrawFeatures.VIEW_PALETTE)
-    protected JComponent createDisclosedComponent(int state) {
-        System.out.println("hello");
-        JPanel p = null;
-        setState(state);
-        System.out.println("this is the state: " + this.state);
-
-        JPanel np = makeNewJPanel(p);
-        ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
-        
-        if(state == 2) {
-            makeGridSizeField(labels);
-        }
-        
-        // add buttons
-        addGridButton(labels, np);
-        addZoomButton(labels, np);
-
-        return np;
+    private void addGridButton(JPanel p) {
+        AbstractButton btn = ButtonFactory.createToggleGridButton(view);
+        btn.setUI((PaletteButtonUI) PaletteButtonUI.createUI(btn));
+        labels.configureToolBarButton(btn, "alignGrid");
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        p.add(btn, gbc);
     }
 
-    private void makeGridSizeField(ResourceBundleUtil labels) {
+    private void addZoomButton(JPanel p) {
+        AbstractButton btn = ButtonFactory.createZoomButton(view);
+
+        btn.setUI((PaletteButtonUI) PaletteButtonUI.createUI(btn));
+        labels.configureToolBarButton(btn, "view.zoomFactor");
+        btn.setText("100 %");
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.insets = new Insets(3, 0, 0, 0);
+        gbc.weighty = 1;
+        gbc.weightx = 1;
+
+        btn.setPreferredSize(new Dimension(btn.getPreferredSize().width, btn.getPreferredSize().height));
+        p.add(btn, gbc);
+    }
+
+    private void makeGridSizeField(JPanel p) {
         JLifeFormattedTextField gridSizeField = new JLifeFormattedTextField();
         gridSizeField.setColumns(3);
         gridSizeField.setToolTipText(labels.getString("view.gridSize.toolTipText"));
@@ -168,9 +157,28 @@ public class ViewToolBar extends AbstractToolBar {
         });
 
         gridSizeField.setValue(constrainer.getHeight());
+        addGridSizeField(gridSizeField, p);
     }
 
-    private JLifeFormattedTextField makeScaleFactorField(ResourceBundleUtil labels) {
+    private void addGridSizeField(JLifeFormattedTextField gridSizeField, JPanel p) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        p.add(gridSizeField, gbc);
+    }
+
+    private void addScaleFactorField(JLifeFormattedTextField scaleFactorField, JPanel p) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(3, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        p.add(scaleFactorField, gbc);
+    }
+
+    private void makeScaleFactorField(JPanel p) {
         final JLifeFormattedTextField scaleFactorField = new JLifeFormattedTextField();
         scaleFactorField.setColumns(3);
         scaleFactorField.setToolTipText(labels.getString("view.zoomFactor.toolTipText"));
@@ -200,7 +208,7 @@ public class ViewToolBar extends AbstractToolBar {
                 }
             }
         });
-        return scaleFactorField;
+        addScaleFactorField(scaleFactorField, p);
     }
 
     @Override
