@@ -380,6 +380,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
 
     private AbstractAction createWindingRuleNonZeroAction(ResourceBundleUtil labels) {
         return new AbstractAction(labels.getString("attribute.windingRule.nonZero.text")) {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 WINDING_RULE.set(SVGPathFigure.this, WindingRule.NON_ZERO);
                 getDrawing().fireUndoableEditHappened(
@@ -400,7 +401,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    private AbstractAction createClosePathAction(ResourceBundleUtil labels) {
+    public AbstractAction createClosePathAction(ResourceBundleUtil labels) {
         return new AbstractAction(labels.getString("attribute.closePath.text")) {
             @FeatureEntryPoint(JHotDrawFeatures.LINE_TOOL)
             public void actionPerformed(ActionEvent evt) {
