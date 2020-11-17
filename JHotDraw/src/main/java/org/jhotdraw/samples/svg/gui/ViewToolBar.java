@@ -41,12 +41,7 @@ import org.jhotdraw.text.JavaNumberFormatter;
 public class ViewToolBar extends AbstractToolBar {
 
     private DrawingView view;
-    private int state;
     ResourceBundleUtil labels;
-
-    public void setState(int state) {
-        this.state = state;
-    }
 
     /**
      * Creates new instance.
@@ -69,7 +64,6 @@ public class ViewToolBar extends AbstractToolBar {
     @FeatureEntryPoint(JHotDrawFeatures.VIEW_PALETTE)
     protected JComponent createDisclosedComponent(int state) {
         JPanel p = null;
-        setState(state);
 
         if (state == 1 || state == 2) {
             p = makeNewJPanel(p);
@@ -82,7 +76,6 @@ public class ViewToolBar extends AbstractToolBar {
                 makeGridSizeField(p);
                 makeScaleFactorField(p);
             }
-
             return p;
         }
         return p;
@@ -132,14 +125,9 @@ public class ViewToolBar extends AbstractToolBar {
     }
 
     private void makeGridSizeField(JPanel p) {
-        JLifeFormattedTextField gridSizeField = new JLifeFormattedTextField();
-        gridSizeField.setColumns(3);
+        JLifeFormattedTextField gridSizeField = createTextField(0d, 1000d, 1d);
         gridSizeField.setToolTipText(labels.getString("view.gridSize.toolTipText"));
-        gridSizeField.setHorizontalAlignment(JLifeFormattedTextField.RIGHT);
-        gridSizeField.putClientProperty("Palette.Component.segmentPosition", "first");
-        gridSizeField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(gridSizeField));
-        gridSizeField.setFormatterFactory(JavaNumberFormatter.createFormatterFactory(0d, 1000d, 1d, true, false));
-        gridSizeField.setHorizontalAlignment(JTextField.LEADING);
+
         final GridConstrainer constrainer = (GridConstrainer) view.getVisibleConstrainer();
         gridSizeField.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -169,24 +157,8 @@ public class ViewToolBar extends AbstractToolBar {
         p.add(gridSizeField, gbc);
     }
 
-    private void addScaleFactorField(JLifeFormattedTextField scaleFactorField, JPanel p) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(3, 0, 0, 0);
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        p.add(scaleFactorField, gbc);
-    }
-
     private void makeScaleFactorField(JPanel p) {
-        final JLifeFormattedTextField scaleFactorField = new JLifeFormattedTextField();
-        scaleFactorField.setColumns(3);
-        scaleFactorField.setToolTipText(labels.getString("view.zoomFactor.toolTipText"));
-        scaleFactorField.setHorizontalAlignment(JLifeFormattedTextField.RIGHT);
-        scaleFactorField.putClientProperty("Palette.Component.segmentPosition", "first");
-        scaleFactorField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(scaleFactorField));
-        scaleFactorField.setFormatterFactory(JavaNumberFormatter.createFormatterFactory(0.01d, 50d, 100d, true, false));
-        scaleFactorField.setHorizontalAlignment(JTextField.LEADING);
+        JLifeFormattedTextField scaleFactorField = createTextField(0.01d, 50d, 100d);
         scaleFactorField.setValue(view.getScaleFactor());
         scaleFactorField.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -209,6 +181,27 @@ public class ViewToolBar extends AbstractToolBar {
             }
         });
         addScaleFactorField(scaleFactorField, p);
+    }
+
+    private void addScaleFactorField(JLifeFormattedTextField scaleFactorField, JPanel p) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(3, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        p.add(scaleFactorField, gbc);
+    }
+
+    private JLifeFormattedTextField createTextField(double min, double max, double scaleFactor) {
+        JLifeFormattedTextField textField = new JLifeFormattedTextField();
+        textField.setColumns(3);
+        textField.setToolTipText(labels.getString("view.zoomFactor.toolTipText"));
+        textField.setHorizontalAlignment(JLifeFormattedTextField.RIGHT);
+        textField.putClientProperty("Palette.Component.segmentPosition", "first");
+        textField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(textField));
+        textField.setFormatterFactory(JavaNumberFormatter.createFormatterFactory(min, max, scaleFactor, true, false));
+        textField.setHorizontalAlignment(JTextField.LEADING);
+        return textField;
     }
 
     @Override
