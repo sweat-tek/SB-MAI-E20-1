@@ -110,7 +110,7 @@ public class SelectionOpacityIcon extends javax.swing.ImageIcon {
                 }
                 g.setColor(new Color((((int) (opacity * 255)) << 24) | (strokeColor.getRGB() & 0xffffff), true));
                 g.translate(x, y);
-                g.draw(strokeShape);
+                g.draw(strokeShape);    
                 g.translate(-x, -y);
             }
         }
