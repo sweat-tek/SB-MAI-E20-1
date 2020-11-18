@@ -18,6 +18,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
@@ -31,10 +32,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class SVGPathFigureTest {
     SVGPathFigure svgPathFigure;
-    
-    public SVGPathFigureTest() {
-        svgPathFigure = new SVGPathFigure();
-    }
+    Point2D.Double point;
     
     @BeforeClass
     public static void setUpClass() {
@@ -46,6 +44,8 @@ public class SVGPathFigureTest {
     
     @Before
     public void setUp() {
+        svgPathFigure = new SVGPathFigure();
+        point = new Point2D.Double(1, 1);
     }
     
     @After
@@ -55,25 +55,38 @@ public class SVGPathFigureTest {
     @Test
     public void testConstructor() {
         SVGPathFigure svgPathFigure1 = new SVGPathFigure();
+        // Assert that the constructor adds an SVGBezierFigure object to the list of children.
         assertFalse(svgPathFigure1.getChildren().isEmpty());
         assertSame(svgPathFigure1.getChildren().get(0).getClass(), SVGBezierFigure.class);
 
         SVGPathFigure svgPathFigureEmpty = new SVGPathFigure(true);
+        //Assert that the other constructor doesn't add a figure to the list of children
         assertTrue(svgPathFigureEmpty.getChildren().isEmpty());
-        assertSame(AttributeKeys.WINDING_RULE.get(svgPathFigure), AttributeKeys.WindingRule.NON_ZERO);
+        //Assert that the default values have been set correctly on both SVGPathFigures
+        assertSame(AttributeKeys.WINDING_RULE.get(svgPathFigure1), AttributeKeys.WindingRule.NON_ZERO);
         assertSame(AttributeKeys.WINDING_RULE.get(svgPathFigureEmpty), AttributeKeys.WindingRule.NON_ZERO);
     }
 
     @Test
     public void testGetActions() {
-        Point2D.Double p = new Point2D.Double(1, 1);
-        Collection<Action> actions = svgPathFigure.getActions(p);
+        Collection<Action> actions = svgPathFigure.getActions(point);
         assertFalse(actions.isEmpty());
         assertEquals(2, actions.size());
+
+        for (String label : Arrays.asList("Close Path", "Even Odd")) {
+            assertTrue(actions.stream().anyMatch(action -> action.getValue(Action.NAME).equals(label)));
+        }
+    }
+
+    @Test
+    public void testGetActionsWithTransformAttribute() {
         svgPathFigure.setAttribute(AttributeKeys.TRANSFORM, new AffineTransform());
-        actions = svgPathFigure.getActions(p);
-        // asserting that the number of actions is higher if the TRANSFORM attribute is not null
+        Collection<Action> actions = svgPathFigure.getActions(point);
         assertEquals(4, actions.size());
+
+        for (String label : Arrays.asList("Remove Transformation", "Flatten Transformation", "Close Path", "Even Odd")) {
+            assertTrue(actions.stream().anyMatch(action -> action.getValue(Action.NAME).equals(label)));
+        }
     }
 
     @Test
