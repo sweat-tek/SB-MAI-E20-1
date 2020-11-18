@@ -8,7 +8,7 @@ public class LineToolJGivenTest
 
     @Test
     public void lineShouldBeDrawn(){
-        given().anSvgPathFigure().and().graphics();
+        given().anSvgPathFigure().and().graphics().and().strokeColor();
         when().settingAttributeOnPathFigure().and().drawingFigureOnGraphics();
         then().lineIsDrawnInCorrectColor();
     }

@@ -15,9 +15,11 @@ public class WhenSettingAttributeOnPathFigureAndDrawingFigure extends Stage<When
     SVGPathFigure svgPathFigure;
     @ExpectedScenarioState
     Graphics2D g;
+    @ExpectedScenarioState
+    Color color;
 
     public WhenSettingAttributeOnPathFigureAndDrawingFigure settingAttributeOnPathFigure() {
-        svgPathFigure.setAttribute(AttributeKeys.FILL_COLOR, Color.MAGENTA);
+        svgPathFigure.setAttribute(AttributeKeys.STROKE_COLOR, color);
         return self();
     }
 
