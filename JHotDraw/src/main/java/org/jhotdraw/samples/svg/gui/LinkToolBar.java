@@ -134,6 +134,7 @@ public class LinkToolBar extends AbstractToolBar {
             gbc.weightx = 1d;
             gbc.weighty = 1d;
             p.add(scrollPane, gbc);
+
         }
 
         public void configureTargetLabel() {
@@ -177,6 +178,7 @@ public class LinkToolBar extends AbstractToolBar {
             int linkFieldColumns;
             Insets scrollPaneInsets;
             int targetFieldColumns;
+            p.isOpaque();
 
             switch (state) {
                 case 1:
