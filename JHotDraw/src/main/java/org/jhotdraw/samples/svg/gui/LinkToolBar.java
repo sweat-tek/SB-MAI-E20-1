@@ -51,6 +51,7 @@ public class LinkToolBar extends AbstractToolBar {
         labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
         setName(labels.getString(getID() + ".toolbar"));
         setDisclosureStateCount(3);
+
     }
 
     @Override
@@ -174,6 +175,7 @@ public class LinkToolBar extends AbstractToolBar {
         }
 
         public JPanel execute() {
+            assert getName().equals(labels.getString(getID() + ".toolbar")) : "NAME OF LINK TOOLBAR IS NOT CORRECT";
             configureJPanel();
             int linkFieldColumns;
             Insets scrollPaneInsets;
