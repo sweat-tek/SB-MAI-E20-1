@@ -51,7 +51,7 @@ public class Paragraph {
      *        values
      * @return Returns the actual bounds of the paragraph.
      */
-    Paragraph(GeneralPath shape, AttributedCharacterIterator styledText,
+    public Paragraph(GeneralPath shape, AttributedCharacterIterator styledText,
             float verticalPos, float maxVerticalPos,float leftMargin, 
             float rightMargin, float[] tabStops, int tabCount,
             FontRenderContext fontRenderContext) {
