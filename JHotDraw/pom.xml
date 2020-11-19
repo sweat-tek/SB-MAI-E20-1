@@ -46,8 +46,15 @@
         </dependency>
         <dependency>
             <groupId>com.tngtech.jgiven</groupId>
-            <artifactId>jgiven-core</artifactId>
-            <version>0.15.3</version>
+            <artifactId>jgiven-junit</artifactId>
+            <version>1.0.0-RC6</version>
+            <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.tngtech.jgiven</groupId>
+                    <artifactId>jgiven-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>   
  </project>
