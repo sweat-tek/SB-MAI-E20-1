@@ -52,7 +52,6 @@ public class BezierPathIterator implements PathIterator {
      */
     public BezierPathIterator(BezierPath path) {
         this(path, null);
-        System.out.println(path.toString());
     }
 
     /**

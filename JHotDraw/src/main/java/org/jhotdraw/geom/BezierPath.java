@@ -103,12 +103,15 @@ public class BezierPath extends ArrayList<BezierPath.Node>
          */
         public boolean keepColinear = true;
 
+        
         public Node() {
         }
 
         public Node(Node that) {
             setTo(that);
         }
+        
+        
 
         public void setTo(Node that) {
             this.mask = that.mask;
@@ -156,7 +159,17 @@ public class BezierPath extends ArrayList<BezierPath.Node>
             x[2] = x2;
             y[2] = y2;
         }
-
+        
+        public Node (SubNode subnode1, SubNode subnode2 , SubNode subnode3){
+            System.out.println("This method is awesome");
+            this.mask = subnode1.getMask();
+            x[0] = subnode1.getX();
+            y[0] = subnode1.getY();
+            x[1] = subnode2.getX();
+            y[1] = subnode2.getY();
+            x[2] = subnode3.getX();
+            y[2] = subnode3.getY();
+        }
         public int getMask() {
             return mask;
         }
@@ -255,9 +268,23 @@ public class BezierPath extends ArrayList<BezierPath.Node>
     public void add(Point2D.Double c0) {
         add(new Node(0, c0, c0, c0));
     }
-
+/*
     public void addPoint(double x, double y) {
         add(new Node(0, x, y, x, y, x, y));
+    }
+    */
+    public void addPoint(double x, double y) {
+        System.out.println("Add point is runing");
+        SubNode subnode = new SubNode.NodeBuilder()
+                .withMask(0)
+                .withX(x)
+                .withY(y)
+                .build();
+        SubNode subnode2 = new SubNode.NodeBuilder()
+                .withX(x)
+                .withY(y)
+                .build();
+        add(new Node(subnode, subnode2, subnode2));
     }
 
     /**
