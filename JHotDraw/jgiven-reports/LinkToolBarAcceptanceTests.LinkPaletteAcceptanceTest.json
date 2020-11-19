@@ -1,0 +1,70 @@
+{
+  "className": "LinkToolBarAcceptanceTests.LinkPaletteAcceptanceTest",
+  "scenarios": [
+    {
+      "className": "LinkToolBarAcceptanceTests.LinkPaletteAcceptanceTest",
+      "testMethodName": "linkPaletteAcceptanceTest",
+      "description": "Link palette acceptance test",
+      "tags": [],
+      "notImplementedYet": false,
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "selectedFigure",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "selectedFigure"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 949785324
+            },
+            {
+              "name": "linkInserted",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "linkInserted"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 12355129
+            },
+            {
+              "name": "linkIsAddedToFigure",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "linkIsAddedToFigure"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 3280724
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "success": true,
+          "durationInNanos": 977877403
+        }
+      ],
+      "durationInNanos": 977877403,
+      "executionStatus": "SUCCESS"
+    }
+  ]
+}
