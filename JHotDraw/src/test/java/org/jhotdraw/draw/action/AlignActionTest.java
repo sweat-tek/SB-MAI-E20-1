@@ -78,4 +78,25 @@ public class AlignActionTest {
         }
     }
 
+    @Test
+    public void testGetSelectionBounds() {
+        /* SETUP WITH MOCKITO */
+        AlignAction.East alignEastAction = mock(AlignAction.East.class);
+        DrawingView drawingView = mock(DrawingView.class);
+        when(drawingView.getSelectedFigures()).thenReturn(new HashSet<>(selectedFigures));
+        when(alignEastAction.getView()).thenReturn(drawingView);
+        doCallRealMethod().when(alignEastAction).getSelectionBounds();
+
+        /* ACTUAL TEST */
+        Rectangle2D.Double expectedBounds = lineFigure1.getBounds();
+        expectedBounds.add(lineFigure2.getBounds());
+
+        Rectangle2D.Double actualBounds = alignEastAction.getSelectionBounds();
+        assertTrue(actualBounds.x == expectedBounds.x &&
+            actualBounds.y == expectedBounds.y &&
+            actualBounds.width == expectedBounds.width &&
+            actualBounds.height == expectedBounds.height
+        );
+    }
+
 }
