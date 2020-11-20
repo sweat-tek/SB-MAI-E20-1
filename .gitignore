@@ -311,3 +311,5 @@ $RECYCLE.BIN/
 
 .classpath
 .project
+FeatureTraces/
+nbactions.xml
