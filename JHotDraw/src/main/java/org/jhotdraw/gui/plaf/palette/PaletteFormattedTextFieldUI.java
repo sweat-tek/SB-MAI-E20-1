@@ -87,58 +87,61 @@ public class PaletteFormattedTextFieldUI extends BasicFormattedTextFieldUI
                         bounds.height -= slop;
                     }
 
-                    // horizontal adjustments
-                    Component c = getContainer();
-                    if (c instanceof JTextField)
-                    {
-                        JTextField field = (JTextField) c;
-                        BoundedRangeModel vis = field.getHorizontalVisibility();
-                        int max = Math.max(hspan, bounds.width);
-                        int value = vis.getValue();
-                        int extent = Math.min(max, bounds.width - 1);
-                        if ((value + extent) > max)
-                        {
-                            value = max - extent;
-                        }
-                        vis.setRangeProperties(value, extent, vis.getMinimum(),
-                                max, false);
-                        if (hspan < bounds.width)
-                        {
-                            // horizontally align the interior
-                            int slop = bounds.width - 1 - hspan;
-
-                            int align = ((JTextField) c).getHorizontalAlignment();
-
-                            if (align == LEADING)
-                            {
-                                align = LEFT;
-                            } else if (align == TRAILING)
-                            {
-                                align = RIGHT;
-                            }
-
-                            switch (align)
-                            {
-                                case SwingConstants.CENTER:
-                                    bounds.x += slop / 2;
-                                    bounds.width -= slop;
-                                    break;
-                                case SwingConstants.RIGHT:
-                                    bounds.x += slop;
-                                    bounds.width -= slop;
-                                    break;
-                            }
-                            System.out.println(align);
-                        } else
-                        {
-                            // adjust the allocation to match the bounded range.
-                            bounds.width = hspan;
-                            bounds.x -= vis.getValue();
-                        }
-                    }
+                    horizontalAdjustments(hspan, bounds);
                     return bounds;
                 }
                 return null;
+            }
+
+            private void horizontalAdjustments(int hspan, Rectangle bounds)
+            {
+                Component c = getContainer();
+                if (c instanceof JTextField)
+                {
+                    JTextField field = (JTextField) c;
+                    BoundedRangeModel vis = field.getHorizontalVisibility();
+                    int max = Math.max(hspan, bounds.width);
+                    int value = vis.getValue();
+                    int extent = Math.min(max, bounds.width - 1);
+                    if ((value + extent) > max)
+                    {
+                        value = max - extent;
+                    }
+                    vis.setRangeProperties(value, extent, vis.getMinimum(),
+                            max, false);
+                    if (hspan < bounds.width)
+                    {
+                        // horizontally align the interior
+                        int slop = bounds.width - 1 - hspan;
+                        
+                        int align = ((JTextField) c).getHorizontalAlignment();
+                        
+                        if (align == LEADING)
+                        {
+                            align = LEFT;
+                        } else if (align == TRAILING)
+                        {
+                            align = RIGHT;
+                        }
+                        
+                        switch (align)
+                        {
+                            case SwingConstants.CENTER:
+                                bounds.x += slop / 2;
+                                bounds.width -= slop;
+                                break;
+                            case SwingConstants.RIGHT:
+                                bounds.x += slop;
+                                bounds.width -= slop;
+                                break;
+                        }
+                    } else
+                    {
+                        // adjust the allocation to match the bounded range.
+                        bounds.width = hspan;
+                        bounds.x -= vis.getValue();
+                    }
+                }
             }
 
             @Override
