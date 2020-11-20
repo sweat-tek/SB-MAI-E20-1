@@ -1,41 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.jhotdraw.draw.action;
 
-import java.awt.event.ActionEvent;
+import com.tngtech.jgiven.annotation.ProvidedScenarioState;
+import junit.framework.TestCase;
+import org.jhotdraw.draw.DrawingView;
+import org.jhotdraw.draw.LineFigure;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
-import org.jhotdraw.draw.*;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.mock;
 
-import static org.junit.Assert.*;
-
-/**
- *
- * @author ngram
- */
 public class AlignActionTest {
+    private ArrayList<LineFigure> selectedFigures;
+    private LineFigure lineFigure1;
+    private LineFigure lineFigure2;
 
-    ArrayList<LineFigure> selectedFigures;
-    LineFigure lineFigure1;
-    LineFigure lineFigure2;
-    Rectangle2D.Double selectionBounds;
-    
     @Before
-    public void setUp() {
+    public void setup() {
         /* DRAW 2 LINES */
         selectedFigures = new ArrayList<>();
         // Line 1
@@ -46,36 +34,6 @@ public class AlignActionTest {
         lineFigure2 = new LineFigure();
         lineFigure2.setBounds(new Point2D.Double(3, 3), new Point2D.Double(5,5));
         selectedFigures.add(lineFigure2);
-
-        /* MAKE SELECTION THAT INCLUDES LINES */
-        selectionBounds = new Rectangle2D.Double(0, 0, 10, 10);
-    }
-    
-    @Test
-    public void testAlignFiguresEast() {
-        /* SETUP WITH MOCKITO */
-        AlignAction.East alignEastAction = mock(AlignAction.East.class);
-        DrawingView drawingView = mock(DrawingView.class);
-        when(drawingView.getSelectedFigures()).thenReturn(new HashSet<>(selectedFigures));
-        when(alignEastAction.getView()).thenReturn(drawingView);
-        doCallRealMethod().when(alignEastAction).alignFigures(anyCollection(), any(Rectangle2D.Double.class));
-        doCallRealMethod().when(alignEastAction).getTranslate(any(Rectangle2D.Double.class), any(Rectangle2D.Double.class));
-
-        /* ACTUAL TEST */
-        // Before
-        for (LineFigure selectedFigure : selectedFigures) {
-            System.out.println(selectedFigure.getBounds());
-        }
-
-        // Calling the method
-        // When calling alignFigures, we expected the x values to increase as they move towards EAST
-        alignEastAction.alignFigures(selectedFigures, selectionBounds);
-
-        // After
-        for (LineFigure selectedFigure : selectedFigures) {
-            System.out.println(selectedFigure.getBounds());
-            assertTrue(selectionBounds.x + selectionBounds.width - selectedFigure.getBounds().width == selectedFigure.getBounds().x);
-        }
     }
 
     @Test
@@ -83,8 +41,8 @@ public class AlignActionTest {
         /* SETUP WITH MOCKITO */
         AlignAction.East alignEastAction = mock(AlignAction.East.class);
         DrawingView drawingView = mock(DrawingView.class);
-        when(drawingView.getSelectedFigures()).thenReturn(new HashSet<>(selectedFigures));
-        when(alignEastAction.getView()).thenReturn(drawingView);
+        Mockito.when(drawingView.getSelectedFigures()).thenReturn(new HashSet<>(selectedFigures));
+        Mockito.when(alignEastAction.getView()).thenReturn(drawingView);
         doCallRealMethod().when(alignEastAction).getSelectionBounds();
 
         /* ACTUAL TEST */
@@ -93,10 +51,9 @@ public class AlignActionTest {
 
         Rectangle2D.Double actualBounds = alignEastAction.getSelectionBounds();
         assertTrue(actualBounds.x == expectedBounds.x &&
-            actualBounds.y == expectedBounds.y &&
-            actualBounds.width == expectedBounds.width &&
-            actualBounds.height == expectedBounds.height
+                actualBounds.y == expectedBounds.y &&
+                actualBounds.width == expectedBounds.width &&
+                actualBounds.height == expectedBounds.height
         );
     }
-
 }
