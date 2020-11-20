@@ -19,8 +19,9 @@ import org.jhotdraw.draw.*;
 
 /**
  * {@code SelectionOpacityIcon} visualizes an opacity attribute of the selected
- * {@code Figure}(s) in the active {@code DrawingView} of a {@code DrawingEditor}.
- * 
+ * {@code Figure}(s) in the active {@code DrawingView} of a
+ * {@code DrawingEditor}.
+ *
  * @author Werner Randelshofer
  * @version 1.0 2008-05-23 Created.
  */
@@ -33,7 +34,9 @@ public class SelectionOpacityIcon extends javax.swing.ImageIcon {
     private Shape fillShape;
     private Shape strokeShape;
 
-    /** Creates a new instance.
+    /**
+     * Creates a new instance.
+     *
      * @param editor The drawing editor.
      * @param opacityKey The opacityKey of the default attribute
      * @param imageLocation the icon image
@@ -57,40 +60,25 @@ public class SelectionOpacityIcon extends javax.swing.ImageIcon {
         this.strokeShape = strokeShape;
     }
 
-    public SelectionOpacityIcon(
-            DrawingEditor editor,
-            AttributeKey<Double> opacityKey,
-            AttributeKey<Color> fillColorKey,
-            AttributeKey<Color> strokeColorKey,
-            Image image,
-            Shape fillShape,
-            Shape strokeShape) {
-        super(image);
-        this.editor = editor;
-        this.opacityKey = opacityKey;
-        this.fillColorKey = fillColorKey;
-        this.strokeColorKey = strokeColorKey;
-        this.fillShape = fillShape;
-        this.strokeShape = strokeShape;
-    }
+    //EZ
 
     @Override
-    public void paintIcon(java.awt.Component c, java.awt.Graphics gr, int x, int y) {
+    public void paintIcon(Component c, Graphics gr, int x, int y) {
         Graphics2D g = (Graphics2D) gr;
         super.paintIcon(c, g, x, y);
         Double opacity;
         Color fillColor;
         Color strokeColor;
-            DrawingView view = editor.getActiveView();
-            if (view != null && view.getSelectedFigures().size() == 1) {
-                opacity = opacityKey.get(view.getSelectedFigures().iterator().next());
-                fillColor = (fillColorKey == null) ? null : fillColorKey.get(view.getSelectedFigures().iterator().next());
-                strokeColor = (strokeColorKey == null) ? null : strokeColorKey.get(view.getSelectedFigures().iterator().next());
-            } else {
-                opacity = opacityKey.get(editor.getDefaultAttributes());
-                fillColor = (fillColorKey == null) ? null : fillColorKey.get(editor.getDefaultAttributes());
-                strokeColor = (strokeColorKey == null) ? null : strokeColorKey.get(editor.getDefaultAttributes());
-            }
+        DrawingView view = editor.getActiveView();
+        if (view != null && view.getSelectedFigures().size() == 1) {
+            opacity = opacityKey.get(view.getSelectedFigures().iterator().next());
+            fillColor = (fillColorKey == null) ? null : fillColorKey.get(view.getSelectedFigures().iterator().next());
+            strokeColor = (strokeColorKey == null) ? null : strokeColorKey.get(view.getSelectedFigures().iterator().next());
+        } else {
+            opacity = opacityKey.get(editor.getDefaultAttributes());
+            fillColor = (fillColorKey == null) ? null : fillColorKey.get(editor.getDefaultAttributes());
+            strokeColor = (strokeColorKey == null) ? null : strokeColorKey.get(editor.getDefaultAttributes());
+        }
 
         if (fillColorKey != null && fillShape != null) {
             if (opacity != null) {
@@ -102,7 +90,7 @@ public class SelectionOpacityIcon extends javax.swing.ImageIcon {
                 g.fill(fillShape);
                 g.translate(-x, -y);
             }
-            }
+        }
         if (strokeColorKey != null && strokeShape != null) {
             if (opacity != null) {
                 if (strokeColor == null) {
