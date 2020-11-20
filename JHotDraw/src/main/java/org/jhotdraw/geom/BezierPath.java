@@ -1098,32 +1098,12 @@ public class BezierPath extends ArrayList<BezierPath.Node>
      * The implementation of this method has been derived from
      * Apache Batik class org.apache.batik.ext.awt.geom.ExtendedGeneralPath#computArc
      *
-     * @param rx the x radius of the ellipse
-     * @param ry the y radius of the ellipse
-     *
-     * @param xAxisRotation the angle from the x-axis of the current
-     * coordinate system to the x-axis of the ellipse in degrees.
-     *
-     * @param largeArcFlag the large arc flag. If true the arc
-     * spanning less than or equal to 180 degrees is chosen, otherwise
-     * the arc spanning greater than 180 degrees is chosen
-     *
-     * @param sweepFlag the sweep flag. If true the line joining
-     * center to arc sweeps through decreasing angles otherwise it
-     * sweeps through increasing angles
-     *
-     * @param x the absolute x coordinate of the final point of the arc.
-     * @param y the absolute y coordinate of the final point of the arc.
+     * @param para
      */
-    public void arcTo(double rx, double ry,
-            double xAxisRotation,
-            boolean largeArcFlag, boolean sweepFlag,
-            double x, double y) {
-
-
+    public void arcTo(ArcToParameters para) {
         // Ensure radii are valid
-        if (rx == 0 || ry == 0) {
-            lineTo(x, y);
+        if (para.getRx() == 0 || para.getRy() == 0) {
+            lineTo(para.getX(), para.getY());
             return;
         }
 
@@ -1132,17 +1112,17 @@ public class BezierPath extends ArrayList<BezierPath.Node>
         double x0 = ((lastPoint.mask & C2_MASK) == C2_MASK) ? lastPoint.x[2] : lastPoint.x[0];
         double y0 = ((lastPoint.mask & C2_MASK) == C2_MASK) ? lastPoint.y[2] : lastPoint.y[0];
 
-        if (x0 == x && y0 == y) {
+        if (x0 == para.getX() && y0 == para.getY()) {
             // If the endpoints (x, y) and (x0, y0) are identical, then this
             // is equivalent to omitting the elliptical arc segment entirely.
             return;
         }
 
         // Compute the half distance between the current and the final point
-        double dx2 = (x0 - x) / 2d;
-        double dy2 = (y0 - y) / 2d;
+        double dx2 = (x0 - para.getX()) / 2d;
+        double dy2 = (y0 - para.getY()) / 2d;
         // Convert angle from degrees to radians
-        double angle = Math.toRadians(xAxisRotation);
+        double angle = Math.toRadians(para.getxAxisRotation());
         double cosAngle = Math.cos(angle);
         double sinAngle = Math.sin(angle);
 
@@ -1152,46 +1132,46 @@ public class BezierPath extends ArrayList<BezierPath.Node>
         double x1 = (cosAngle * dx2 + sinAngle * dy2);
         double y1 = (-sinAngle * dx2 + cosAngle * dy2);
         // Ensure radii are large enough
-        rx = Math.abs(rx);
-        ry = Math.abs(ry);
-        double Prx = rx * rx;
-        double Pry = ry * ry;
+        para.setRx(Math.abs(para.getRx()));
+        para.setRy(Math.abs(para.getRy()));
+        double Prx = para.getRx() * para.getRx();
+        double Pry = para.getRy() * para.getRy();
         double Px1 = x1 * x1;
         double Py1 = y1 * y1;
         // check that radii are large enough
         double radiiCheck = Px1 / Prx + Py1 / Pry;
         if (radiiCheck > 1) {
-            rx = Math.sqrt(radiiCheck) * rx;
-            ry = Math.sqrt(radiiCheck) * ry;
-            Prx = rx * rx;
-            Pry = ry * ry;
+            para.setRx(Math.sqrt(radiiCheck) * para.getRx());
+            para.setRy(Math.sqrt(radiiCheck) * para.getRy());
+            Prx = para.getRx() * para.getRx();
+            Pry = para.getRy() * para.getRy();
         }
 
         //
         // Step 2 : Compute (cx1, cy1)
         //
-        double sign = (largeArcFlag == sweepFlag) ? -1 : 1;
+        double sign = (para.isLargeArcFlag() == para.isSweepFlag()) ? -1 : 1;
         double sq = ((Prx * Pry) - (Prx * Py1) - (Pry * Px1)) / ((Prx * Py1) + (Pry * Px1));
         sq = (sq < 0) ? 0 : sq;
         double coef = (sign * Math.sqrt(sq));
-        double cx1 = coef * ((rx * y1) / ry);
-        double cy1 = coef * -((ry * x1) / rx);
+        double cx1 = coef * ((para.getRx() * y1) / para.getRy());
+        double cy1 = coef * -((para.getRy() * x1) / para.getRx());
 
         //
         // Step 3 : Compute (cx, cy) from (cx1, cy1)
         //
-        double sx2 = (x0 + x) / 2.0;
-        double sy2 = (y0 + y) / 2.0;
+        double sx2 = (x0 + para.getX()) / 2.0;
+        double sy2 = (y0 + para.getY()) / 2.0;
         double cx = sx2 + (cosAngle * cx1 - sinAngle * cy1);
         double cy = sy2 + (sinAngle * cx1 + cosAngle * cy1);
 
         //
         // Step 4 : Compute the angleStart (angle1) and the angleExtent (dangle)
         //
-        double ux = (x1 - cx1) / rx;
-        double uy = (y1 - cy1) / ry;
-        double vx = (-x1 - cx1) / rx;
-        double vy = (-y1 - cy1) / ry;
+        double ux = (x1 - cx1) / para.getRx();
+        double uy = (y1 - cy1) / para.getRy();
+        double vx = (-x1 - cx1) / para.getRx();
+        double vy = (-y1 - cy1) / para.getRy();
         double p, n;
 
         // Compute the angle start
@@ -1205,9 +1185,9 @@ public class BezierPath extends ArrayList<BezierPath.Node>
         p = ux * vx + uy * vy;
         sign = (ux * vy - uy * vx < 0) ? -1d : 1d;
         double angleExtent = Math.toDegrees(sign * Math.acos(p / n));
-        if (!sweepFlag && angleExtent > 0) {
+        if (!para.isSweepFlag() && angleExtent > 0) {
             angleExtent -= 360f;
-        } else if (sweepFlag && angleExtent < 0) {
+        } else if (para.isSweepFlag() && angleExtent < 0) {
             angleExtent += 360f;
         }
         angleExtent %= 360f;
@@ -1217,8 +1197,8 @@ public class BezierPath extends ArrayList<BezierPath.Node>
         // We can now build the resulting Arc2D in double precision
         //
         Arc2D.Double arc = new Arc2D.Double(
-                cx - rx, cy - ry,
-                rx * 2d, ry * 2d,
+                cx - para.getRx(), cy - para.getRy(),
+                para.getRx() * 2d, para.getRy() * 2d,
                 -angleStart, -angleExtent,
                 Arc2D.OPEN);
 
@@ -1283,5 +1263,77 @@ public class BezierPath extends ArrayList<BezierPath.Node>
      */
     public int getWindingRule() {
         return windingRule;
+    }
+
+    public static class ArcToParameters {
+
+        private double rx;
+        private double ry;
+        private final double xAxisRotation;
+        private final boolean largeArcFlag;
+        private final boolean sweepFlag;
+        private final double x;
+        private final double y;
+
+        /**
+         * @param rx the x radius of the ellipse
+         * @param ry the y radius of the ellipse
+     *@param xAxisRotation the angle from the x-axis of the current
+     * coordinate system to the x-axis of the ellipse in degrees.
+     *@param largeArcFlag the large arc flag. If true the arc
+     * spanning less than or equal to 180 degrees is chosen, otherwise
+     * the arc spanning greater than 180 degrees is chosen
+     *@param sweepFlag the sweep flag. If true the line joining
+     * center to arc sweeps through decreasing angles otherwise it
+     * sweeps through increasing angles
+     *@param x the absolute x coordinate of the final point of the arc.
+         * @param y the absolute y coordinate of the final point of the arc.
+         */
+        public ArcToParameters(double rx, double ry, double xAxisRotation, boolean largeArcFlag, boolean sweepFlag, double x, double y) {
+
+            this.rx = rx;
+            this.ry = ry;
+            this.xAxisRotation = xAxisRotation;
+            this.largeArcFlag = largeArcFlag;
+            this.sweepFlag = sweepFlag;
+            this.x = x;
+            this.y = y;
+        }
+
+        public double getRx() {
+            return rx;
+        }
+
+        public double getRy() {
+            return ry;
+        }
+
+        public double getxAxisRotation() {
+            return xAxisRotation;
+        }
+
+        public boolean isLargeArcFlag() {
+            return largeArcFlag;
+        }
+
+        public boolean isSweepFlag() {
+            return sweepFlag;
+        }
+
+        public double getX() {
+            return x;
+        }
+
+        public double getY() {
+            return y;
+        }
+
+        public void setRx(double rx) {
+            this.rx = rx;
+        }
+
+        public void setRy(double ry) {
+            this.ry = ry;
+        }
     }
 }
