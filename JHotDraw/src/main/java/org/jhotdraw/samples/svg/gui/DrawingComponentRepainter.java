@@ -1,22 +1,25 @@
 /**
- * @(#)DrawingComponentRepainter.java  1.0  2008-06-08
- *
+ * @(#)DrawingComponentRepainter.java 1.0  2008-06-08
+ * <p>
  * Copyright (c) 2008 by the original authors of JHotDraw
  * and all its contributors.
  * All rights reserved.
- *
- * The copyright of this software is owned by the authors and  
- * contributors of the JHotDraw project ("the copyright holders").  
- * You may not use, copy or modify this software, except in  
- * accordance with the license agreement you entered into with  
- * the copyright holders. For details see accompanying license terms. 
+ * <p>
+ * The copyright of this software is owned by the authors and
+ * contributors of the JHotDraw project ("the copyright holders").
+ * You may not use, copy or modify this software, except in
+ * accordance with the license agreement you entered into with
+ * the copyright holders. For details see accompanying license terms.
  */
 package org.jhotdraw.samples.svg.gui;
 
-import org.jhotdraw.draw.action.*;
-import java.beans.*;
+import org.jhotdraw.draw.DrawingEditor;
+import org.jhotdraw.draw.DrawingView;
+import org.jhotdraw.draw.FigureEvent;
+import org.jhotdraw.draw.action.AbstractComponentRepainter;
+
 import javax.swing.*;
-import org.jhotdraw.draw.*;
+import java.beans.PropertyChangeListener;
 
 /**
  * Calls repaint on components, which show attributes of a drawing object
@@ -25,15 +28,15 @@ import org.jhotdraw.draw.*;
  * @author Werner Randelshofer
  * @version 1.0 23.05.2008 Created.
  */
-public class DrawingComponentRepainter extends FigureAdapter
+public class DrawingComponentRepainter extends AbstractComponentRepainter
         implements PropertyChangeListener {
 
     private DrawingEditor editor;
     private JComponent component;
 
     public DrawingComponentRepainter(DrawingEditor editor, JComponent component) {
+        super(component);
         this.editor = editor;
-        this.component = component;
         if (editor != null) {
             if (editor.getActiveView() != null) {
                 DrawingView view = editor.getActiveView();
@@ -52,39 +55,27 @@ public class DrawingComponentRepainter extends FigureAdapter
         component.repaint();
     }
 
-    public void propertyChange(PropertyChangeEvent evt) {
-        String name = evt.getPropertyName();
-        if (name == DrawingEditor.ACTIVE_VIEW_PROPERTY) {
-            DrawingView view = (DrawingView) evt.getOldValue();
-            if (view != null) {
-                view.removePropertyChangeListener(this);
-                if (view.getDrawing() != null) {
-                    view.getDrawing().removeFigureListener(this);
-                }
+    @Override
+    public void addListeners(final DrawingView view) {
+        if (view != null) {
+            view.addPropertyChangeListener(this);
+            if (view.getDrawing() != null) {
+                view.getDrawing().addFigureListener(this);
             }
-            view = (DrawingView) evt.getNewValue();
-            if (view != null) {
-                view.addPropertyChangeListener(this);
-                if (view.getDrawing() != null) {
-                    view.getDrawing().addFigureListener(this);
-                }
-            }
-            component.repaint();
-        } else if (name == DrawingView.DRAWING_PROPERTY) {
-            Drawing drawing = (Drawing) evt.getOldValue();
-            if (drawing != null) {
-                drawing.removeFigureListener(this);
-            }
-            drawing = (Drawing) evt.getNewValue();
-            if (drawing != null) {
-                drawing.addFigureListener(this);
-            }
-            component.repaint();
-        } else {
-            component.repaint();
         }
     }
 
+    @Override
+    public void removeListeners(final DrawingView view) {
+        if (view != null) {
+            view.removePropertyChangeListener(this);
+            if (view.getDrawing() != null) {
+                view.getDrawing().removeFigureListener(this);
+            }
+        }
+    }
+
+    @Override
     public void dispose() {
         if (editor != null) {
             if (editor.getActiveView() != null) {
