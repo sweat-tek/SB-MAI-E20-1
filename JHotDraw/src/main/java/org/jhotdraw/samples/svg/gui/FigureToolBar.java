@@ -166,7 +166,7 @@ public class FigureToolBar extends AbstractToolBar {
         JAttributeSlider opacitySlider = setupOpacitySlider();
         opacityPopupButton.add(opacitySlider);
         setSelectionIcon(opacityPopupButton);
-        //new SelectionComponentRepainter(editor, opacityPopupButton);
+        new SelectionComponentRepainter(editor, opacityPopupButton);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
@@ -182,7 +182,7 @@ public class FigureToolBar extends AbstractToolBar {
                 p.add(opacityField, gbc);
         }
         p.add(opacityPopupButton, gbc);
-        //new FigureAttributeEditorHandler<>(OPACITY, opacitySlider, editor);
+        new FigureAttributeEditorHandler<>(OPACITY, opacitySlider, editor);
         
         return p;
     }
@@ -211,7 +211,7 @@ public class FigureToolBar extends AbstractToolBar {
         opacityField.setUI((PaletteFormattedTextFieldUI) PaletteFormattedTextFieldUI.createUI(opacityField));
         opacityField.setFormatterFactory(JavaNumberFormatter.createFormatterFactory(0d, 1d, 100d));
         opacityField.setHorizontalAlignment(JTextField.LEADING);
-        //new FigureAttributeEditorHandler<Double>(OPACITY, opacityField, editor);
+        new FigureAttributeEditorHandler<Double>(OPACITY, opacityField, editor);
         return opacityField;
     }
 
