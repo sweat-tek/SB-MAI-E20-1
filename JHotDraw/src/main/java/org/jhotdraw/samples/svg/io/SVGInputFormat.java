@@ -1757,7 +1757,17 @@ public class SVGInputFormat implements InputFormat {
                     }
                     p.y = tt.nval;
 
-                    path.arcTo(rx, ry, xAxisRotation, largeArcFlag, sweepFlag, p.x, p.y);
+                    BezierPath.ArcToParameters arcToParameters = new ArcToParametersBuilder()
+                            .setRx(rx)
+                            .setRy(ry)
+                            .setxAxisRotation(xAxisRotation)
+                            .setLargeArcFlag(largeArcFlag)
+                            .setSweepFlag(sweepFlag)
+                            .setX(p.x)
+                            .setY(p.y)
+                            .createArcToParameters();
+
+                    path.arcTo(arcToParameters);
 
                     nextCommand = 'A';
                     break;
@@ -1795,7 +1805,17 @@ public class SVGInputFormat implements InputFormat {
                     }
                     p.y += tt.nval;
 
-                    path.arcTo(rx, ry, xAxisRotation, largeArcFlag, sweepFlag, p.x, p.y);
+                    BezierPath.ArcToParameters arcToParameters = new ArcToParametersBuilder()
+                            .setRx(rx)
+                            .setRy(ry)
+                            .setxAxisRotation(xAxisRotation)
+                            .setLargeArcFlag(largeArcFlag)
+                            .setSweepFlag(sweepFlag)
+                            .setX(p.x)
+                            .setY(p.y)
+                            .createArcToParameters();
+
+                    path.arcTo(arcToParameters);
 
                     nextCommand = 'a';
                     break;
