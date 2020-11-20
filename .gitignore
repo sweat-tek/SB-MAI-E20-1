@@ -16,6 +16,10 @@ local.properties
 .loadpath
 .recommenders
 
+.idea
+
+FeatureTraces
+
 # External tool builders
 .externalToolBuilders/
 
