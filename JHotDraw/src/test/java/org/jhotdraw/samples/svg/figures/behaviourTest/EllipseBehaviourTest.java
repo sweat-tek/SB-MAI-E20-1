@@ -16,7 +16,7 @@ public class EllipseBehaviourTest extends ScenarioTest<GivenEllipse, WhenEnlarge
 
     @Test
     public void selectingAnEllipseAndEnlargenIt() {
-        given().aSelectedFigure();
+        given().anEllipseFigure();
         when().enlargenSelectedEllipse();
         then().ellipseHasBeenEnlarged();
     }
