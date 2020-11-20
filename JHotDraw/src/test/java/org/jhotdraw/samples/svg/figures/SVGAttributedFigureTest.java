@@ -24,9 +24,6 @@ import static org.junit.Assert.*;
  */
 public class SVGAttributedFigureTest {
 
-    public SVGAttributedFigureTest() {
-    }
-
     @BeforeClass
     public static void setUpClass() {
     }
