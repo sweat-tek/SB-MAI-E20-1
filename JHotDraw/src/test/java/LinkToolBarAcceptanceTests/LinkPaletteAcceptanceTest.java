@@ -9,7 +9,7 @@ public class LinkPaletteAcceptanceTest extends ScenarioTest<GivenSelectedFigure,
     public void linkPaletteAcceptanceTest() {
         // As a user, I want to be able to create links on the drawings and text I make,
         // so that I can make interactive drawings
-        given().selectedFigure();
+        given().aSelectedFigure();
         when().linkInserted();
         then().linkIsAddedToFigure();
     }

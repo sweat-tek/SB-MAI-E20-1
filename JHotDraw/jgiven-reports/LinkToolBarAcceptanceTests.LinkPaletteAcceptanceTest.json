@@ -15,18 +15,18 @@
           "caseNr": 1,
           "steps": [
             {
-              "name": "selectedFigure",
+              "name": "aSelectedFigure",
               "words": [
                 {
                   "value": "Given",
                   "isIntroWord": true
                 },
                 {
-                  "value": "selectedFigure"
+                  "value": "aSelectedFigure"
                 }
               ],
               "status": "PASSED",
-              "durationInNanos": 949785324
+              "durationInNanos": 545010103
             },
             {
               "name": "linkInserted",
@@ -40,7 +40,7 @@
                 }
               ],
               "status": "PASSED",
-              "durationInNanos": 12355129
+              "durationInNanos": 23094721
             },
             {
               "name": "linkIsAddedToFigure",
@@ -53,18 +53,18 @@
                   "value": "linkIsAddedToFigure"
                 }
               ],
-              "status": "PASSED",
-              "durationInNanos": 3280724
+              "status": "FAILED",
+              "durationInNanos": 10443339
             }
           ],
           "explicitArguments": [],
           "derivedArguments": [],
-          "success": true,
-          "durationInNanos": 977877403
+          "success": false,
+          "errorMessage": "expected:\u003c[test].dk\u003e but was:\u003c[google].dk\u003e",
+          "durationInNanos": 594480130
         }
       ],
-      "durationInNanos": 977877403,
-      "executionStatus": "SUCCESS"
+      "durationInNanos": 594480130
     }
   ]
 }
