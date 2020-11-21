@@ -38,6 +38,7 @@ public class WhenEnlargen extends Stage<WhenEnlargen> {
         this.enlargedWidth = 100;
     }
 
+    //Take the given ellipse and make it bigger
     WhenEnlargen enlargenSelectedEllipse() {
 
         this.ellipseFigure.willChange();

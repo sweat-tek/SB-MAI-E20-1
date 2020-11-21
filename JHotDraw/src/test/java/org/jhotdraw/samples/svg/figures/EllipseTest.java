@@ -5,6 +5,7 @@
  */
 package org.jhotdraw.samples.svg.figures;
 
+import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -13,6 +14,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.Collection;
 import javax.swing.Action;
+import org.jhotdraw.draw.AttributeKey;
 import org.jhotdraw.draw.DefaultDrawingEditor;
 import org.jhotdraw.draw.DefaultDrawingView;
 import org.jhotdraw.draw.DrawingEditor;
@@ -37,10 +39,10 @@ import sun.java2d.SunGraphics2D;
  *
  * @author oscar
  */
-public class SVGAttributedFigureTest {
+public class EllipseTest {
 
     private DrawingEditor editor;
-    private Figure ellipseFigure;
+    private SVGEllipseFigure ellipseFigure;
 
     @Mock
     Graphics2D graphicsMock;
@@ -71,13 +73,50 @@ public class SVGAttributedFigureTest {
      * Test of draw method, of class SVGAttributedFigure.
      */
     @Test
-    public void testDraw() {
-        assertTrue(this.size == this.ellipseFigure.getBounds().height);
+    public void testResize() {
+
+        this.ellipseFigure.willChange();
+
+        Point2D.Double anchor = new Point2D.Double(0, 0);
+        Point2D.Double lead = new Point2D.Double(100, 100);
+        this.ellipseFigure.setBounds(anchor, lead);
+
+        this.ellipseFigure.changed();
+
+        assertTrue(this.ellipseFigure.getHeight() == 100);
+        assertTrue(this.ellipseFigure.getWidth() == 100);
 
         this.ellipseFigure.draw(graphicsMock);
 
-        assertTrue(this.size == this.ellipseFigure.getBounds().height);
+        assertTrue(this.ellipseFigure.getHeight() == 100);
+        assertTrue(this.ellipseFigure.getWidth() == 100);
 
     }
 
+    @Test
+    public void testDraw() {
+
+        Object initialStrokeWidth = 1.0;
+        Object initialFillColor = new Color(0, 0, 0);
+
+        this.ellipseFigure.draw(graphicsMock);
+
+        Object strokeWidth = getAttribute("strokeWidth");
+        assertEquals(initialStrokeWidth, strokeWidth);
+
+        Object fillColor = getAttribute("fillColor");
+        assertEquals(initialFillColor, fillColor);
+
+    }
+
+    
+    private Object getAttribute(String attributeKey) {
+        for (AttributeKey key : this.ellipseFigure.getAttributes().keySet()) {
+            if (key.getKey() == attributeKey) {
+                return this.ellipseFigure.getAttribute(key);
+
+            }
+        }
+        return null;
+    }
 }

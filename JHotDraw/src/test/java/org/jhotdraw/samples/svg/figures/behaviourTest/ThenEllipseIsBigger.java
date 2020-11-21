@@ -31,6 +31,7 @@ public class ThenEllipseIsBigger extends Stage<ThenEllipseIsBigger> {
     @ExpectedScenarioState
     private double originalWidth;
 
+    //Use standard assertions to check for whether the given ellipse has grown in size
     public ThenEllipseIsBigger ellipseHasBeenEnlarged() {
 
         boolean heightIsBigger = this.originalHeight < this.enlargedHeight;
