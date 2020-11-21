@@ -87,7 +87,7 @@ public class StrokeToolBar extends AbstractToolBar {
                 strokeColor(btn, labels, gbc, p);
                 opacitySlider(labels, gbc, p);
                 createStrokeWidthPopupSlider(labels, gbc, p);
-                createStrokeDaskesButtons(btn, labels, gbc, p);
+                createStrokeDashesButtons(btn, labels, gbc, p);
             case 2:
                 btn = ButtonFactory.createSelectionColorButton(editor,
                         STROKE_COLOR, ButtonFactory.HSV_COLORS, ButtonFactory.HSV_COLORS_COLUMN_COUNT,
@@ -154,7 +154,7 @@ public class StrokeToolBar extends AbstractToolBar {
         new FigureAttributeEditorHandler<Double>(STROKE_WIDTH, strokeWidthSlider, editor);
     }
 
-    public void createStrokeDaskesButtons(AbstractButton btn, ResourceBundleUtil labels, GridBagConstraints gbc, JPanel p) {
+    public void createStrokeDashesButtons(AbstractButton btn, ResourceBundleUtil labels, GridBagConstraints gbc, JPanel p) {
         // Create stroke dashes buttons
         btn = ButtonFactory.createStrokeJoinButton(editor, labels);
         btn.setUI((PaletteButtonUI) PaletteButtonUI.createUI(btn));
