@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.action.ButtonFactory;
 import org.jhotdraw.draw.action.SelectionComponentRepainter;
 import org.jhotdraw.gui.FigureAttributeEditorHandler;
@@ -14,6 +13,7 @@ import org.jhotdraw.gui.JPopupButton;
 import org.jhotdraw.gui.plaf.palette.PaletteButtonUI;
 import org.jhotdraw.gui.plaf.palette.PaletteFormattedTextFieldUI;
 import org.jhotdraw.gui.plaf.palette.PaletteSliderUI;
+import org.jhotdraw.samples.svg.gui.disclosed_component.DisclosedComponentObjects;
 import org.jhotdraw.text.FontFormatter;
 import org.jhotdraw.text.JavaNumberFormatter;
 

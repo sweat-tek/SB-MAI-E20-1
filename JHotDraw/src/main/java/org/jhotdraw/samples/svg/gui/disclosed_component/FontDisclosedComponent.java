@@ -1,22 +1,19 @@
-package org.jhotdraw.samples.svg.gui;
+package org.jhotdraw.samples.svg.gui.disclosed_component;
 
 import java.util.Arrays;
 
 import javax.swing.JPanel;
 
 import org.jhotdraw.draw.DrawingEditor;
+import org.jhotdraw.samples.svg.gui.UILib;
 
-public class DisclosedComponent {
-    private DisclosedComponentObjects disclosedComponentObjects;
-    private int[] allowedStates;
-    private int actualState;
+public class FontDisclosedComponent extends DisclosedComponent {
 
-    public DisclosedComponent(int[] allowedStates, int actualState, DrawingEditor editor) {
-        this.allowedStates = allowedStates;
-        this.actualState = actualState;
-        this.disclosedComponentObjects = new DisclosedComponentObjects(editor);
+    public FontDisclosedComponent(int[] allowedStates, int actualState, DrawingEditor editor) {
+        super(allowedStates, actualState, editor);
     }
 
+    @Override
     public JPanel build() {
         if (!Arrays.stream(allowedStates).anyMatch(i -> i == actualState))
             return null;
@@ -30,4 +27,5 @@ public class DisclosedComponent {
         UILib.createFontStyleChooser(disclosedComponentObjects);
         return disclosedComponentObjects.getPanel();
     }
+
 }

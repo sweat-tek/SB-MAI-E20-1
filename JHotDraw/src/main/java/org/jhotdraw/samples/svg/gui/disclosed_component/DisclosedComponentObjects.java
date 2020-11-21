@@ -1,4 +1,4 @@
-package org.jhotdraw.samples.svg.gui;
+package org.jhotdraw.samples.svg.gui.disclosed_component;
 
 import javax.swing.JPanel;
 

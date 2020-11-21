@@ -21,6 +21,7 @@ import javax.swing.*;
 import org.jhotdraw.app.JHotDrawFeatures;
 import org.jhotdraw.draw.*;
 import org.jhotdraw.gui.JFontChooser;
+import org.jhotdraw.samples.svg.gui.disclosed_component.FontDisclosedComponent;
 
 /**
  * StrokeToolBar.
@@ -91,7 +92,7 @@ public class FontToolBar extends AbstractToolBar {
     @Override
     @FeatureEntryPoint(JHotDrawFeatures.FONT_PALETTE)
     public JComponent createDisclosedComponent(int state) {
-        return new DisclosedComponent(new int[] { 1, 2 }, state, editor).build();
+        return new FontDisclosedComponent(new int[] { 1, 2 }, state, editor).build();
     }
 
     @Override
