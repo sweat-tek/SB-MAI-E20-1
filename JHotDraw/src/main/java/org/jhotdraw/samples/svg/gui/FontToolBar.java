@@ -22,7 +22,6 @@ import javax.swing.*;
 import org.jhotdraw.app.JHotDrawFeatures;
 import org.jhotdraw.draw.*;
 import org.jhotdraw.gui.JFontChooser;
-import org.jhotdraw.samples.svg.gui.FontToolBarUI.FontUI;
 
 /**
  * StrokeToolBar.
@@ -93,11 +92,11 @@ public class FontToolBar extends AbstractToolBar {
 
     @Override
     @FeatureEntryPoint(JHotDrawFeatures.FONT_PALETTE)
-    protected JComponent createDisclosedComponent(int state) {
+	public JComponent createDisclosedComponent(int state) {
         JPanel p = new JPanel(new GridBagLayout());
         p.setBorder(new EmptyBorder(5, 5, 5, 8));
 
-        FontUI fontUI = new FontUI(editor, p, labels);
+        FontToolBarUI fontUI = new FontToolBarUI(editor, p, labels);
         if (state == 1)
             fontUI.createFontFamilyChooser(2, 2, labels.getString("attribute.font.toolTipText"));
         else

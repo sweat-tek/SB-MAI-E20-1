@@ -1,4 +1,4 @@
-package org.jhotdraw.samples.svg.gui.FontToolBarUI;
+package org.jhotdraw.samples.svg.gui;
 
 import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.action.ButtonFactory;
@@ -25,13 +25,13 @@ import javax.swing.JTextField;
 import javax.swing.JFormattedTextField.AbstractFormatterFactory;
 import javax.swing.plaf.SliderUI;
 
-public class FontUI {
+public class FontToolBarUI {
 
     private JPanel panel;
     private DrawingEditor editor;
     private ResourceBundleUtil labels;
 
-    public FontUI(DrawingEditor editor, JPanel panel, ResourceBundleUtil labels) {
+    public FontToolBarUI(DrawingEditor editor, JPanel panel, ResourceBundleUtil labels) {
         this.panel = panel;
         this.editor = editor;
         this.labels = labels;
