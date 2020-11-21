@@ -22,7 +22,7 @@ import org.apache.batik.ext.awt.MultipleGradientPaint;
  * @author tobia
  */
 abstract public class AbstractPaletteBorder implements Border,UIResource
-{   
+{      
     protected void drawBorder(Component c, int width, Graphics2D g, int borderColor, int x, int y, int height, float[] stops, Color[] stopColors)
     {
         String segmentPosition = getSegmentPosition(c);
@@ -62,5 +62,9 @@ abstract public class AbstractPaletteBorder implements Border,UIResource
     public boolean isBorderOpaque() {
         return true;
     }
+    
+    
+   
+    
     
 }

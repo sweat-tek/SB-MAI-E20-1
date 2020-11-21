@@ -88,17 +88,17 @@ public class AttributeActionTest
     public void testApplyAttributesToBlueTest()
     {
         //Imitating choosing a color form the colorChooser
-        HashMap<AttributeKey, Object> attr = new HashMap<>();
-        attr.put(AttributeKeys.FILL_COLOR, Color.blue);
+        HashMap<AttributeKey, Object> colorMap = new HashMap<>();
+        colorMap.put(AttributeKeys.FILL_COLOR, Color.blue);
 
-        //Create a figure an select it
+        //create and select figures
         Figure f1 = new BezierFigure();
         editor.getActiveView().getDrawing().add(f1);
         editor.getActiveView().addToSelection(f1);
         
         
         //apply the color attribute
-        editorColorChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures()); 
+        editorColorChooserAction.applyAttributesTo(colorMap, editor.getActiveView().getSelectedFigures()); 
         
         //Test that the figure has the new color
         assertEquals(f1.getAttribute(AttributeKeys.FILL_COLOR), Color.blue);
@@ -112,16 +112,16 @@ public class AttributeActionTest
     public void testApplyAttributesToRedTest()
     {
         //Imitating choosing a color form the colorChooser
-        HashMap<AttributeKey, Object> attr = new HashMap<>();
-        attr.put(AttributeKeys.FILL_COLOR, Color.red);
+        HashMap<AttributeKey, Object> colorMap = new HashMap<>();
+        colorMap.put(AttributeKeys.FILL_COLOR, Color.red);
 
-        //Imitating selected figures
+        //create and select figures
         Figure f1 = new BezierFigure();
         editor.getActiveView().getDrawing().add(f1);
         editor.getActiveView().addToSelection(f1);
 
         //apply the color attribute
-        editorColorChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures()); 
+        editorColorChooserAction.applyAttributesTo(colorMap, editor.getActiveView().getSelectedFigures()); 
         
         //Test that the figure has the new color
         assertEquals(f1.getAttribute(AttributeKeys.FILL_COLOR), Color.red);
@@ -135,16 +135,16 @@ public class AttributeActionTest
     public void testApplyAttributesToFalseRedTest()
     {
         //Imitating choosing a color form the colorChooser
-        HashMap<AttributeKey, Object> attr = new HashMap<>();
-        attr.put(AttributeKeys.FILL_COLOR, Color.red);
+        HashMap<AttributeKey, Object> colorMap = new HashMap<>();
+        colorMap.put(AttributeKeys.FILL_COLOR, Color.red);
 
-        //Imitating selected figures
+        //create and select figures
         Figure f1 = new BezierFigure();
         editor.getActiveView().getDrawing().add(f1);
         editor.getActiveView().addToSelection(f1);
 
         //apply the color attribute
-        editorColorChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures()); 
+        editorColorChooserAction.applyAttributesTo(colorMap, editor.getActiveView().getSelectedFigures()); 
         
         //Test that the figure is not still also green somehow
         assertNotEquals(f1.getAttribute(AttributeKeys.FILL_COLOR), Color.green);        
@@ -157,8 +157,8 @@ public class AttributeActionTest
     public void testApplyAttributesToGroup()
     {
         //Imitating choosing a color form the colorChooser
-        HashMap<AttributeKey, Object> attr = new HashMap<>();
-        attr.put(AttributeKeys.FILL_COLOR, Color.red);
+        HashMap<AttributeKey, Object> colorMap = new HashMap<>();
+        colorMap.put(AttributeKeys.FILL_COLOR, Color.red);
 
         //create and select figures
         Figure f1 = new BezierFigure();
@@ -172,7 +172,7 @@ public class AttributeActionTest
         editor.getActiveView().addToSelection(f3);
 
         //apply the color attribute
-        editorColorChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures()); 
+        editorColorChooserAction.applyAttributesTo(colorMap, editor.getActiveView().getSelectedFigures()); 
         //Test that all the figures are now red
         assertEquals(f1.getAttribute(AttributeKeys.FILL_COLOR), Color.red);    
         assertEquals(f2.getAttribute(AttributeKeys.FILL_COLOR), Color.red); 
@@ -182,28 +182,28 @@ public class AttributeActionTest
     @Test
     public void testApplyAttributeOpacity()
     {
-        HashMap<AttributeKey, Object> attr = new HashMap<>();
-        attr.put(SVGAttributeKeys.OPACITY, 0.5d);
+        HashMap<AttributeKey, Object> opacityMap = new HashMap<>();
+        opacityMap.put(SVGAttributeKeys.OPACITY, 0.5d);
         
         Figure f1 = new BezierFigure();
         editor.getActiveView().getDrawing().add(f1);
         editor.getActiveView().addToSelection(f1);
         
-        opacityChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures());
+        opacityChooserAction.applyAttributesTo(opacityMap, editor.getActiveView().getSelectedFigures());
          
         assertEquals(f1.getAttribute(SVGAttributeKeys.OPACITY), 0.5, 0.001);
     }
     
     public void testCheckOpacityWithNoChange()
     {
-        HashMap<AttributeKey, Object> attr = new HashMap<>();
-        attr.put(SVGAttributeKeys.OPACITY, 0.5d);
+        HashMap<AttributeKey, Object> opacityMap = new HashMap<>();
+        opacityMap.put(SVGAttributeKeys.OPACITY, 0.5d);
         
         Figure f1 = new BezierFigure();
         editor.getActiveView().getDrawing().add(f1);
         editor.getActiveView().addToSelection(f1);
         
-        opacityChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures());
+        opacityChooserAction.applyAttributesTo(opacityMap, editor.getActiveView().getSelectedFigures());
          
         assertEquals(f1.getAttribute(SVGAttributeKeys.OPACITY), 0.5, 0.1);
     }

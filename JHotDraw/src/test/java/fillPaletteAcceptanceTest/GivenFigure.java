@@ -77,25 +77,18 @@ public class GivenFigure extends Stage<GivenFigure>
         return this;
     }
 
-    GivenFigure aSelectedColorBlue()
+    GivenFigure aSelectedColor(Color c)
     {
         
         colorMap = new HashMap<>();
-        colorMap.put(AttributeKeys.FILL_COLOR, Color.blue);
+        colorMap.put(AttributeKeys.FILL_COLOR, c);
         return this;
     }
     
-    GivenFigure aSelectedColorRed()
-    {
-        colorMap = new HashMap<>();
-        colorMap.put(AttributeKeys.FILL_COLOR, Color.red);
-        return this;
-    }
-    
-    GivenFigure aSelectedOpacityTransparent()
+    GivenFigure aSelectedOpacity(double d)
     {
         opacityMap = new HashMap<>();
-        opacityMap.put(SVGAttributeKeys.OPACITY, 0d);
+        opacityMap.put(SVGAttributeKeys.OPACITY, d);
         return this;
     }
     

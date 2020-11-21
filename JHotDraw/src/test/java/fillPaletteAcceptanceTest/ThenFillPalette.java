@@ -29,31 +29,21 @@ public class ThenFillPalette extends Stage<ThenFillPalette>
     @ExpectedScenarioState
     DrawingEditor editor;
     
-    ThenFillPalette figuresShouldBeColoredBlue()
+    ThenFillPalette figuresShouldBeColored(Color c)
     {
         for (Figure f : editor.getActiveView().getSelectedFigures())
         {
-            Assert.assertEquals(f.getAttribute(AttributeKeys.FILL_COLOR), Color.blue);
+            Assert.assertEquals(f.getAttribute(AttributeKeys.FILL_COLOR), c);
         }
         
         return this;
     }
     
-    ThenFillPalette figuresShouldBeColoredRed()
+    ThenFillPalette figuresShouldHaveOpacity(double d)
     {
         for (Figure f : editor.getActiveView().getSelectedFigures())
         {
-            Assert.assertEquals(f.getAttribute(AttributeKeys.FILL_COLOR), Color.red);
-        }
-        
-        return this;
-    }
-    
-    ThenFillPalette figuresShouldBeTransparent()
-    {
-        for (Figure f : editor.getActiveView().getSelectedFigures())
-        {
-            assertEquals(f.getAttribute(SVGAttributeKeys.OPACITY), 0, 0.01);
+            assertEquals(f.getAttribute(SVGAttributeKeys.OPACITY), d, 0.01);
         }
         
         return this;

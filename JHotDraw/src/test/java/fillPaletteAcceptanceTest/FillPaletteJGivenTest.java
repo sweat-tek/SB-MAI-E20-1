@@ -5,8 +5,8 @@
  */
 package fillPaletteAcceptanceTest;
 
-import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.junit.ScenarioTest;
+import java.awt.Color;
 import org.junit.Test;
 /**
  *
@@ -16,44 +16,63 @@ public class FillPaletteJGivenTest extends ScenarioTest<GivenFigure,WhenFilling,
 {
     @Test
     public void figureIsColoredBlue() {
-        given().aSelectedFigure().and().aSelectedColorBlue();
+        given().aSelectedFigure()
+                .and().aSelectedColor(Color.blue);
+        
         when().fillingColor();
-        then().figuresShouldBeColoredBlue();
+        
+        then().figuresShouldBeColored(Color.blue);
     }
     
     @Test
     public void figureIsColoredRed() {
-        given().aSelectedFigure().and().aSelectedColorRed();
+        given().aSelectedFigure().and().aSelectedColor(Color.red);
         when().fillingColor();
-        then().figuresShouldBeColoredRed();
+        then().figuresShouldBeColored(Color.red);
     }
     
     @Test
     public void figureIsColoredRedGroup() {
-        given().multipleSelectedFigures().and().aSelectedColorRed();
+        given().multipleSelectedFigures().and().aSelectedColor(Color.red);
         when().fillingColor();
-        then().figuresShouldBeColoredRed();
+        then().figuresShouldBeColored(Color.red);
     }
     
     @Test
     public void figureIsColoredBlueGroup() {
-        given().multipleSelectedFigures().and().aSelectedColorBlue();
+        given().multipleSelectedFigures().and().aSelectedColor(Color.blue);
         when().fillingColor();
-        then().figuresShouldBeColoredBlue();
+        then().figuresShouldBeColored(Color.blue);
     }
     
     @Test
-    public void figureIsTransparent() {
-        given().aSelectedFigure().and().aSelectedOpacityTransparent();
+    public void figureIsOpaque() {
+        given().aSelectedFigure()
+                .and().aSelectedOpacity(1);
+        
         when().fillingOpacity();
-        then().figuresShouldBeTransparent();
+        
+        then().figuresShouldHaveOpacity(1);
     }
     
     @Test
     public void figureIsTransparentGroup() {
-        given().multipleSelectedFigures().and().aSelectedOpacityTransparent();
+        given().multipleSelectedFigures().and().aSelectedOpacity(0);
         when().fillingOpacity();
-        then().figuresShouldBeTransparent();
+        then().figuresShouldHaveOpacity(0);
+    }
+    
+    @Test
+    public void testUserStory() {
+        given().multipleSelectedFigures()
+                .and().aSelectedOpacity(0)
+                .and().aSelectedColor(Color.red);
+        
+        when().fillingOpacity()
+                .and().fillingColor();
+        
+        then().figuresShouldHaveOpacity(0)
+                .and().figuresShouldBeColored(Color.red);
     }
     
 }
