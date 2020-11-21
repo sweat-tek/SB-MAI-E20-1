@@ -78,20 +78,16 @@ public class StrokeToolBar extends AbstractToolBar {
         GridBagConstraints gbc = new GridBagConstraints();
         AbstractButton btn;
         Map<AttributeKey, Object> defaultAttributes = new HashMap<AttributeKey, Object>();
-
+        btn = ButtonFactory.createSelectionColorButton(editor,
+                STROKE_COLOR, ButtonFactory.HSV_COLORS, ButtonFactory.HSV_COLORS_COLUMN_COUNT,
+                "attribute.strokeColor", labels, defaultAttributes, new Rectangle(3, 3, 10, 10));
         switch (state) {
             case 1:
-                btn = ButtonFactory.createSelectionColorButton(editor,
-                        STROKE_COLOR, ButtonFactory.HSV_COLORS, ButtonFactory.HSV_COLORS_COLUMN_COUNT,
-                        "attribute.strokeColor", labels, defaultAttributes, new Rectangle(3, 3, 10, 10));
                 strokeColor(btn, labels, gbc, p);
                 opacitySlider(labels, gbc, p);
                 createStrokeWidthPopupSlider(labels, gbc, p);
                 createStrokeDashesButtons(btn, labels, gbc, p);
             case 2:
-                btn = ButtonFactory.createSelectionColorButton(editor,
-                        STROKE_COLOR, ButtonFactory.HSV_COLORS, ButtonFactory.HSV_COLORS_COLUMN_COUNT,
-                        "attribute.strokeColor", labels, defaultAttributes, new Rectangle(3, 3, 10, 10));
                 strokeWidthFieldWithPopupSlider(labels, gbc, btn, p);
                 strokeColorFieldAndButton(gbc, btn, labels, p);
                 opacityFieldWithSlider(labels, gbc, p);
