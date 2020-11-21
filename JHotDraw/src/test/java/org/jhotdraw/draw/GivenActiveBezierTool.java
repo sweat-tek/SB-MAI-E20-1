@@ -10,14 +10,16 @@ import com.tngtech.jgiven.annotation.ProvidedScenarioState;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.util.LinkedHashSet;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
 import org.mockito.Mockito;
 
 /**
  *
  * @author Firefigher
  */
-public class GivenMouseAction extends Stage<GivenMouseAction> {
+public class GivenActiveBezierTool extends Stage<GivenActiveBezierTool> {
     @ProvidedScenarioState
     BezierTool beziertool;
     @ProvidedScenarioState
@@ -37,9 +39,12 @@ public class GivenMouseAction extends Stage<GivenMouseAction> {
         beziertool = new BezierTool(new BezierFigure());
         defaultDrawingEditor = Mockito.mock(DefaultDrawingEditor.class);
         defaultDrawingView = Mockito.mock(DefaultDrawingView.class);
+        Mockito.doCallRealMethod().when(defaultDrawingView).setSelectedFigures(any(LinkedHashSet.class));
+        defaultDrawingView.setSelectedFigures(new LinkedHashSet<Figure>());
+        Mockito.doCallRealMethod().when(defaultDrawingView).addToSelection(any(Figure.class));
+        Mockito.doCallRealMethod().when(defaultDrawingView).getSelectedFigures();
         constrainer = Mockito.mock(GridConstrainer.class);
         drawing = Mockito.mock(QuadTreeDrawing.class);
-        
         
         Mockito.when(defaultDrawingEditor.getActiveView()).thenReturn(defaultDrawingView);
         Mockito.when(defaultDrawingEditor.findView(defaultDrawingView)).thenReturn(defaultDrawingView);
@@ -53,7 +58,7 @@ public class GivenMouseAction extends Stage<GivenMouseAction> {
         
     }
     
-    public GivenMouseAction givenMouseAction() {
+    public GivenActiveBezierTool givenActiveBezierTool() {
         
         //Setting up the variables and mock objects.
         setupMock();
@@ -66,36 +71,6 @@ public class GivenMouseAction extends Stage<GivenMouseAction> {
         assertNotNull(constrainer);
         assertNotNull(drawing);
         
-        
-        //Seting fake mouse action.
-        givenMouseClicked();
-        
-        //Setting a fake mouse dragging.
-        givenMouseDragged();
-        
-        
-        return this;
-    }
-    
-    
-    private void givenMouseClicked() {
-        beziertool.mouseClicked(getMouseEvent(xAxis, yAxis));
-    }
-    
-    private void givenMouseDragged() {
-        for (int i = 0; i < 10; i++) {
-            xAxis = 137 + (i*10);
-            beziertool.mouseDragged(getMouseEvent(xAxis, yAxis));
-        }
-    }
-  
-    private MouseEvent getMouseEvent(int x, int y) {
-        MouseEvent mouseEvent = Mockito.mock(MouseEvent.class);
-        Mockito.when(mouseEvent.getPoint()).thenReturn(new Point(x, y));
-        Mockito.when(mouseEvent.getX()).thenReturn(x);
-        Mockito.when(mouseEvent.getY()).thenReturn(y);
-        Mockito.when(mouseEvent.getSource()).thenReturn(defaultDrawingView);
-        Mockito.when(defaultDrawingView.viewToDrawing(new Point(xAxis, yAxis))).thenReturn(new Point2D.Double(xAxis, yAxis));
-        return mouseEvent;
-    }  
+        return self();
+    } 
 }

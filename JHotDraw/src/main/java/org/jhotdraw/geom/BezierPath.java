@@ -170,6 +170,7 @@ public class BezierPath extends ArrayList<BezierPath.Node>
             x[2] = subnode3.getX();
             y[2] = subnode3.getY();
         }
+        
         public int getMask() {
             return mask;
         }

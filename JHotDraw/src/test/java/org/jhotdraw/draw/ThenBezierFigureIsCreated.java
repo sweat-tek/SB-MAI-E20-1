@@ -5,7 +5,11 @@
  */
 package org.jhotdraw.draw;
 
+import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.ExpectedScenarioState;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import static org.junit.Assert.*;
 
 
@@ -13,23 +17,28 @@ import static org.junit.Assert.*;
  *
  * @author Firefigher
  */
-public class ThenBezierFigure {
+public class ThenBezierFigureIsCreated extends Stage<ThenBezierFigureIsCreated> {
     
     @ExpectedScenarioState
-    BezierTool bezierTool;
-    
+    BezierTool beziertool;
+    @ExpectedScenarioState
+    DefaultDrawingView defaultDrawingView;
     @ExpectedScenarioState
     int xAxis;
     @ExpectedScenarioState
     int yAxis;
     
-    public ThenBezierFigure figureCreated() {
+    public ThenBezierFigureIsCreated thenBezierFigureIsCreated () {
         
-        //Get final figure
-        BezierFigure finalFig = bezierTool.getLastFigure();
+        //Get final figure and control that it is created 
+        Set<Figure> figureSet = defaultDrawingView.getSelectedFigures();
         
+        Iterator<Figure> figureIterator = defaultDrawingView.getSelectedFigures().iterator();
+        BezierFigure finalFig = (BezierFigure) figureIterator.next();
+
+        assertNotNull(beziertool);
         assertNotNull(finalFig);
-        
+
         assertEquals(2, finalFig.path.size());
         
         assertEquals(xAxis -100, finalFig.getBezierPath().get(0).x[0], 0.001);
@@ -38,7 +47,7 @@ public class ThenBezierFigure {
         assertEquals(xAxis, finalFig.getBezierPath().get(1).x[0], 0.001);
         assertEquals(yAxis, finalFig.getBezierPath().get(1).y[0], 0.001);
         
-        return this;
+        return self();
     }
     
 }

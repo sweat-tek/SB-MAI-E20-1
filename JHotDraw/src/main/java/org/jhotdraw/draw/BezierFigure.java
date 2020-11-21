@@ -347,10 +347,10 @@ public class BezierFigure extends AbstractAttributedFigure {
             } else {
                 if (cappedPath.size() > 1) {
                     if (START_DECORATION.get(this) != null) {
-                        
+
                         BezierPath.Node p0 = cappedPath.get(0);
                         BezierPath.Node p1 = cappedPath.get(1);
-                        
+
                         Point2D.Double pp = returnControllerPoint(p0, p1);
                         /* Now handled in returnControllerPoint
                         Point2D.Double pp;
@@ -361,7 +361,7 @@ public class BezierFigure extends AbstractAttributedFigure {
                         } else {
                             pp = p1.getControlPoint(0);
                         }
-                        */
+                         */
                         double radius = START_DECORATION.get(this).getDecorationRadius(this);
                         double lineLength = Geom.length(p0.getControlPoint(0), pp);
                         cappedPath.set(0, 0, Geom.cap(pp, p0.getControlPoint(0), -Math.min(radius, lineLength)));
@@ -369,7 +369,7 @@ public class BezierFigure extends AbstractAttributedFigure {
                     if (END_DECORATION.get(this) != null) {
                         BezierPath.Node p0 = cappedPath.get(cappedPath.size() - 1);
                         BezierPath.Node p1 = cappedPath.get(cappedPath.size() - 2);
-                        
+
                         Point2D.Double pp = returnControllerPoint(p0, p1);
                         /* Now handled in returnControllerPoint
                         Point2D.Double pp;
@@ -380,7 +380,7 @@ public class BezierFigure extends AbstractAttributedFigure {
                         } else {
                             pp = p1.getControlPoint(0);
                         }
-                        */
+                         */
                         double radius = END_DECORATION.get(this).getDecorationRadius(this);
                         double lineLength = Geom.length(p0.getControlPoint(0), pp);
                         cappedPath.set(cappedPath.size() - 1, 0, Geom.cap(pp, p0.getControlPoint(0), -Math.min(radius, lineLength)));
@@ -393,15 +393,12 @@ public class BezierFigure extends AbstractAttributedFigure {
     }
 
     public Point2D.Double returnControllerPoint(BezierPath.Node p0, BezierPath.Node p1) {
-        System.out.println("Return controller point called");
 
         Point2D.Double pp;
         if ((p0.getMask() & BezierPath.C2_MASK) != 0) {
-            pp = p0.getControlPoint(2);
-        } else if ((p1.getMask() & BezierPath.C1_MASK) != 0) {
-            pp = p1.getControlPoint(1);
+            pp = ((p0.getMask() & BezierPath.C2_MASK) != 0) ? p0.getControlPoint(2) : p1.getControlPoint(0);
         } else {
-            pp = p1.getControlPoint(0);
+            pp = ((p1.getMask() & BezierPath.C1_MASK) != 0) ? p1.getControlPoint(1) : p1.getControlPoint(0);
         }
         return pp;
     }

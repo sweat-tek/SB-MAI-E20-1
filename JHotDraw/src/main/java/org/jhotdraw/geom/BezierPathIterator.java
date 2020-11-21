@@ -270,11 +270,12 @@ public class BezierPathIterator implements PathIterator {
      * @see PathIterator#SEG_CUBICTO
      * @see PathIterator#SEG_CLOSE
      */
+    /*
     public int currentSegment(double[] coords) {
         return currentSegment(coords, false);
     }
-
-    public int currentSegment(double[] coords, boolean changed) {
+*/
+    public int currentSegment(double[] coords) {
         int numCoords = 0;
         int type = 0;
         if (index == path.size()) {
