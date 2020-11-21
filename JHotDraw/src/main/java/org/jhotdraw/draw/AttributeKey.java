@@ -5,11 +5,11 @@
  * and all its contributors.
  * All rights reserved.
  *
- * The copyright of this software is owned by the authors and  
- * contributors of the JHotDraw project ("the copyright holders").  
- * You may not use, copy or modify this software, except in  
- * accordance with the license agreement you entered into with  
- * the copyright holders. For details see accompanying license terms. 
+ * The copyright of this software is owned by the authors and
+ * contributors of the JHotDraw project ("the copyright holders").
+ * You may not use, copy or modify this software, except in
+ * accordance with the license agreement you entered into with
+ * the copyright holders. For details see accompanying license terms.
  */
 package org.jhotdraw.draw;
 
@@ -21,30 +21,30 @@ import org.jhotdraw.util.*;
 /**
  * AttributeKey provides typesafe access to figure attributes.
  * <p>
- * An AttributeKey has a name, a type and a default value. The default value
- * is returned by Figure.getAttribute, if a Figure does not have an attribute
- * of the specified key.
+ * An AttributeKey has a name, a type and a default value. The default value is
+ * returned by Figure.getAttribute, if a Figure does not have an attribute of
+ * the specified key.
  * <p>
- * The following code example shows how to basicSet and get an attribute on a Figure.
+ * The following code example shows how to basicSet and get an attribute on a
+ * Figure.
  * <pre>
  * Figure aFigure;
  * AttributeKeys.STROKE_COLOR.set(aFigure, Color.blue);
  * </pre>
  * <p>
  * See {@link AttributeKeys} for a list of useful attribute keys.
- * 
+ *
  * @author Werner Randelshofer
  * @version 3.0 2009-04-19 Added explicit
- * <br>2.1 2009-04-15 Added method getPresentationName. The labels are now
- * part of the attribute key.
+ * <br>2.1 2009-04-15 Added method getPresentationName. The labels are now part
+ * of the attribute key.
  * <br>2.0.1 2008-02-13 Fixed comments. Removed equals and hashCode.
  * <br>2.0 2007-05-12 Removed basicSet methods.
- * <br>1.2 2007-04-10 Convenience methods for getting and setting a clone
- * of an attribute added.
- * <br>1.1 2006-12-29 Support for getting/setting attribute keys on a
- * Map added.
- * <br>1.0.1 2006-07-14 Null values are not returned anymore when null
- * values are not allowed.
+ * <br>1.2 2007-04-10 Convenience methods for getting and setting a clone of an
+ * attribute added.
+ * <br>1.1 2006-12-29 Support for getting/setting attribute keys on a Map added.
+ * <br>1.0.1 2006-07-14 Null values are not returned anymore when null values
+ * are not allowed.
  * <br>1.0 7. Juni 2006 Created.
  */
 public class AttributeKey<T> implements Serializable {
@@ -65,25 +65,32 @@ public class AttributeKey<T> implements Serializable {
      * Holds labels for the localization of the attribute.
      */
     private ResourceBundleUtil labels;
-    /** This variable is used as a "type token" so that we can check for
+    /**
+     * This variable is used as a "type token" so that we can check for
      * assignability of attribute values at runtime.
      */
     private Class<T> clazz;
 
-    /** Creates a new instance with the specified attribute key, type token class,
-     * default value null, and allowing null values. */
+    /**
+     * Creates a new instance with the specified attribute key, type token
+     * class, default value null, and allowing null values.
+     */
     public AttributeKey(String key, Class<T> clazz) {
         this(key, clazz, null, true);
     }
 
-    /** Creates a new instance with the specified attribute key, type token class,
-     * and default value, and allowing null values. */
+    /**
+     * Creates a new instance with the specified attribute key, type token
+     * class, and default value, and allowing null values.
+     */
     public AttributeKey(String key, Class<T> clazz, T defaultValue) {
         this(key, clazz, defaultValue, true);
     }
 
-    /** Creates a new instance with the specified attribute key, type token class,
-     * default value, and allowing or disallowing null values. */
+    /**
+     * Creates a new instance with the specified attribute key, type token
+     * class, default value, and allowing or disallowing null values.
+     */
     public AttributeKey(String key, Class<T> clazz, T defaultValue, boolean isNullValueAllowed) {
         this.key = key;
         this.clazz = clazz;
@@ -91,27 +98,26 @@ public class AttributeKey<T> implements Serializable {
         this.isNullValueAllowed = isNullValueAllowed;
     }
 
-    /** Creates a new instance with the specified attribute key, type token class,
-     * default value, and allowing or disallowing null values. 
-     * 
-     * @param key The key string. 
-     * @param clazz This is used as a "type token" for assignability checks
-     * at runtime.
+    /**
+     * Creates a new instance with the specified attribute key, type token
+     * class, default value, and allowing or disallowing null values.
+     *
+     * @param key The key string.
+     * @param clazz This is used as a "type token" for assignability checks at
+     * runtime.
      * @param isNullValueAllowed whether null values are allowed.
      * @param labels ResourceBundle for human friendly representation of this
      * attribute key. The ResourceBundle must have a property named
      * {@code "attribute." + key + ".text"}.
      */
     public AttributeKey(String key, Class<T> clazz, T defaultValue, boolean isNullValueAllowed, ResourceBundleUtil labels) {
-        this.key = key;
-        this.clazz = clazz;
-        this.defaultValue = defaultValue;
-        this.isNullValueAllowed = isNullValueAllowed;
+        this(key, clazz, defaultValue, isNullValueAllowed);
         this.labels = labels;
     }
 
     /**
      * Returns the key string.
+     *
      * @return key string.
      */
     public String getKey() {
@@ -120,6 +126,7 @@ public class AttributeKey<T> implements Serializable {
 
     /**
      * Returns a localized human friendly presentation of the key.
+     *
      * @return the presentation name of the key.
      */
     public String getPresentationName() {
@@ -151,9 +158,9 @@ public class AttributeKey<T> implements Serializable {
     }
 
     /**
-     * Gets the value of the attribute denoted by this AttributeKey from
-     * a Figure.
-     * 
+     * Gets the value of the attribute denoted by this AttributeKey from a
+     * Figure.
+     *
      * @param f A figure.
      * @return The value of the attribute.
      */
@@ -163,9 +170,8 @@ public class AttributeKey<T> implements Serializable {
     }
 
     /**
-     * Gets the value of the attribute denoted by this AttributeKey from
-     * a Map.
-     * 
+     * Gets the value of the attribute denoted by this AttributeKey from a Map.
+     *
      * @param a A Map.
      * @return The value of the attribute.
      */
@@ -176,9 +182,8 @@ public class AttributeKey<T> implements Serializable {
     }
 
     /**
-     * Convenience method for setting a value on the 
-     * specified figure and calling willChange before and changed 
-     * after setting the value.
+     * Convenience method for setting a value on the specified figure and
+     * calling willChange before and changed after setting the value.
      *
      * @param f the Figure
      * @param value the attribute value
@@ -193,7 +198,7 @@ public class AttributeKey<T> implements Serializable {
      * Sets a value on the specified figure without invoking {@code willChange}
      * and {@code changed} on the figure.
      * <p>
-     * This method can be used to efficiently build a drawing from an 
+     * This method can be used to efficiently build a drawing from an
      * {@link InputFormat}.
      *
      * @param f the Figure
@@ -207,8 +212,8 @@ public class AttributeKey<T> implements Serializable {
     }
 
     /**
-     * Sets the attribute and returns an UndoableEditEvent which can be used
-     * to undo it.
+     * Sets the attribute and returns an UndoableEditEvent which can be used to
+     * undo it.
      */
     public UndoableEdit setUndoable(final Figure figure, final T value) {
         if (value == null && !isNullValueAllowed) {
@@ -248,9 +253,8 @@ public class AttributeKey<T> implements Serializable {
     }
 
     /**
-     * Convenience method for seting a clone of a value on the 
-     * specified figure and calling willChange before and changed 
-     * after setting the value.
+     * Convenience method for seting a clone of a value on the specified figure
+     * and calling willChange before and changed after setting the value.
      *
      * @param f the Figure
      * @param value the attribute value
@@ -265,7 +269,7 @@ public class AttributeKey<T> implements Serializable {
      * Sets a clone of a value on the specified figure, without invoking
      * {@code willChange} and {@code changed} on the figure.
      * <p>
-     * This method can be used to efficiently build a drawing from an 
+     * This method can be used to efficiently build a drawing from an
      * {@link InputFormat}.
      *
      * @param f the Figure
@@ -283,8 +287,8 @@ public class AttributeKey<T> implements Serializable {
     }
 
     /**
-     * Use this method to perform a typeface put operation of an attribute
-     * into a Map.
+     * Use this method to perform a typeface put operation of an attribute into
+     * a Map.
      *
      * @param a An attribute map.
      * @param value The new value.
@@ -294,8 +298,8 @@ public class AttributeKey<T> implements Serializable {
     }
 
     /**
-     * Use this method to perform a typeface put operation of an attribute
-     * into a Map.
+     * Use this method to perform a typeface put operation of an attribute into
+     * a Map.
      *
      * @param a An attribute map.
      * @param value The new value.
@@ -325,6 +329,7 @@ public class AttributeKey<T> implements Serializable {
 
     /**
      * Returns true if null values are allowed.
+     *
      * @return true if null values are allowed.
      */
     public boolean isNullValueAllowed() {
@@ -345,7 +350,9 @@ public class AttributeKey<T> implements Serializable {
         return clazz.isInstance(value);
     }
 
-    /** Returns the key string. */
+    /**
+     * Returns the key string.
+     */
     @Override
     public String toString() {
         return key;
@@ -355,10 +362,11 @@ public class AttributeKey<T> implements Serializable {
     public int hashCode() {
         return key.hashCode();
     }
+
     @Override
     public boolean equals(Object that) {
         if (that instanceof AttributeKey) {
-        return ((AttributeKey) that).key.equals(this.key);
+            return ((AttributeKey) that).key.equals(this.key);
         }
         return false;
     }
