@@ -39,5 +39,10 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+        <dependency>
+            <groupId>com.tngtech.jgiven</groupId>
+            <artifactId>jgiven-maven-plugin</artifactId>
+            <version>0.15.3</version>
+        </dependency>
     </dependencies>   
  </project>

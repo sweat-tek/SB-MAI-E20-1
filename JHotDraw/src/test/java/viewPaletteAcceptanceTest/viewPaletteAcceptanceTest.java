@@ -15,6 +15,7 @@ public class viewPaletteAcceptanceTest {
         //so that it will be easier to see and align objects if needed.
         
         given().aCanvasIsCreated();
+        when().gridIsSelected();
     }
     
 }
