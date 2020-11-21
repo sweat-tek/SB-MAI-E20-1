@@ -40,6 +40,7 @@ public class AttributeActionTest
     
     AttributeAction editorColorChooserAction;
     DefaultDrawingEditor editor;
+    AttributeAction opacityChooserAction;
     
     public AttributeActionTest()
     {
@@ -68,8 +69,10 @@ public class AttributeActionTest
 
         //Applying the active view
         editor.setActiveView(drawingView);
-
-        editorColorChooserAction = new EditorColorChooserAction(editor, AttributeKeys.FILL_COLOR);
+        
+        //Instantiate the 2 Choosers
+        opacityChooserAction = new AttributeAction(editor, FILL_OPACITY, null);
+        editorColorChooserAction = new AttributeAction(editor, AttributeKeys.FILL_COLOR,null);
 
     }
     
@@ -170,11 +173,39 @@ public class AttributeActionTest
 
         //apply the color attribute
         editorColorChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures()); 
-        
         //Test that all the figures are now red
         assertEquals(f1.getAttribute(AttributeKeys.FILL_COLOR), Color.red);    
         assertEquals(f2.getAttribute(AttributeKeys.FILL_COLOR), Color.red); 
         assertEquals(f3.getAttribute(AttributeKeys.FILL_COLOR), Color.red); 
+    }
+    
+    @Test
+    public void testApplyAttributeOpacity()
+    {
+        HashMap<AttributeKey, Object> attr = new HashMap<>();
+        attr.put(SVGAttributeKeys.OPACITY, 0.5d);
+        
+        Figure f1 = new BezierFigure();
+        editor.getActiveView().getDrawing().add(f1);
+        editor.getActiveView().addToSelection(f1);
+        
+        opacityChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures());
+         
+        assertEquals(f1.getAttribute(SVGAttributeKeys.OPACITY), 0.5, 0.001);
+    }
+    
+    public void testCheckOpacityWithNoChange()
+    {
+        HashMap<AttributeKey, Object> attr = new HashMap<>();
+        attr.put(SVGAttributeKeys.OPACITY, 0.5d);
+        
+        Figure f1 = new BezierFigure();
+        editor.getActiveView().getDrawing().add(f1);
+        editor.getActiveView().addToSelection(f1);
+        
+        opacityChooserAction.applyAttributesTo(attr, editor.getActiveView().getSelectedFigures());
+         
+        assertEquals(f1.getAttribute(SVGAttributeKeys.OPACITY), 0.5, 0.1);
     }
     
 }

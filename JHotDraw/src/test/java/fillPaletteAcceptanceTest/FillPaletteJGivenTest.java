@@ -42,4 +42,18 @@ public class FillPaletteJGivenTest extends ScenarioTest<GivenFigure,WhenFilling,
         then().figuresShouldBeColoredBlue();
     }
     
+    @Test
+    public void figureIsTransparent() {
+        given().aSelectedFigure().and().aSelectedOpacityTransparent();
+        when().fillingOpacity();
+        then().figuresShouldBeTransparent();
+    }
+    
+    @Test
+    public void figureIsTransparentGroup() {
+        given().multipleSelectedFigures().and().aSelectedOpacityTransparent();
+        when().fillingOpacity();
+        then().figuresShouldBeTransparent();
+    }
+    
 }

@@ -22,6 +22,8 @@ import org.jhotdraw.draw.Figure;
 import org.jhotdraw.draw.QuadTreeDrawing;
 import org.jhotdraw.draw.action.AttributeAction;
 import org.jhotdraw.draw.action.EditorColorChooserAction;
+import org.jhotdraw.samples.svg.SVGAttributeKeys;
+import static org.jhotdraw.samples.svg.SVGAttributeKeys.FILL_OPACITY;
 import org.junit.Test;
 
 
@@ -36,10 +38,13 @@ public class GivenFigure extends Stage<GivenFigure>
     @ProvidedScenarioState
     DrawingEditor editor;
     @ProvidedScenarioState
-    AttributeAction editorColorChooserAction;
+    EditorColorChooserAction colorChooserAction;
     @ProvidedScenarioState
-    HashMap<AttributeKey, Object> attr;
-    
+    HashMap<AttributeKey, Object> colorMap;
+    @ProvidedScenarioState
+    HashMap<AttributeKey, Object> opacityMap;
+    @ProvidedScenarioState
+    AttributeAction opacityChooserAction;
 
     @BeforeStage
     private void before() {
@@ -47,7 +52,9 @@ public class GivenFigure extends Stage<GivenFigure>
         DrawingView view = new DefaultDrawingView();
         view.setDrawing(new QuadTreeDrawing());
         editor.setActiveView(view);
-        editorColorChooserAction = new EditorColorChooserAction(editor, AttributeKeys.FILL_COLOR);
+        colorChooserAction = new EditorColorChooserAction(editor, AttributeKeys.FILL_COLOR);
+        opacityChooserAction = new AttributeAction(editor, FILL_OPACITY, null);
+        
     }
 
     GivenFigure aSelectedFigure() {
@@ -72,15 +79,23 @@ public class GivenFigure extends Stage<GivenFigure>
 
     GivenFigure aSelectedColorBlue()
     {
-        attr = new HashMap<>();
-        attr.put(AttributeKeys.FILL_COLOR, Color.blue);
+        
+        colorMap = new HashMap<>();
+        colorMap.put(AttributeKeys.FILL_COLOR, Color.blue);
         return this;
     }
     
     GivenFigure aSelectedColorRed()
     {
-        attr = new HashMap<>();
-        attr.put(AttributeKeys.FILL_COLOR, Color.red);
+        colorMap = new HashMap<>();
+        colorMap.put(AttributeKeys.FILL_COLOR, Color.red);
+        return this;
+    }
+    
+    GivenFigure aSelectedOpacityTransparent()
+    {
+        opacityMap = new HashMap<>();
+        opacityMap.put(SVGAttributeKeys.OPACITY, 0d);
         return this;
     }
     

@@ -15,7 +15,9 @@ import org.jhotdraw.draw.AttributeKeys;
 import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.Figure;
 import org.jhotdraw.draw.action.AttributeAction;
+import org.jhotdraw.samples.svg.SVGAttributeKeys;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -25,11 +27,7 @@ import org.junit.Test;
 public class ThenFillPalette extends Stage<ThenFillPalette>
 {
     @ExpectedScenarioState
-    AttributeAction editorColorChooserAction;
-    @ExpectedScenarioState
     DrawingEditor editor;
-    @ExpectedScenarioState
-    HashMap<AttributeKey, Object> attr;
     
     ThenFillPalette figuresShouldBeColoredBlue()
     {
@@ -46,6 +44,16 @@ public class ThenFillPalette extends Stage<ThenFillPalette>
         for (Figure f : editor.getActiveView().getSelectedFigures())
         {
             Assert.assertEquals(f.getAttribute(AttributeKeys.FILL_COLOR), Color.red);
+        }
+        
+        return this;
+    }
+    
+    ThenFillPalette figuresShouldBeTransparent()
+    {
+        for (Figure f : editor.getActiveView().getSelectedFigures())
+        {
+            assertEquals(f.getAttribute(SVGAttributeKeys.OPACITY), 0, 0.01);
         }
         
         return this;
