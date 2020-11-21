@@ -29,4 +29,4 @@ jobs:
         # Runs the Maven package target in non-interactive mode 
         # to ensure that the code builds, tests pass, and a package can be created.
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file JHotDraw/pom.xml
