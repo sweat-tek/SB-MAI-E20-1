@@ -73,59 +73,47 @@ public class PaletteFormattedTextFieldUI extends BasicFormattedTextFieldUI
              * adjusted.
              * @return the allocation that the superclass should use.
              */
-            protected Shape adjustAllocationXX(Shape a)
-            {
-                if (a != null)
-                {
+            protected Shape adjustAllocationXX(Shape a){
+                if (a != null){
                     Rectangle bounds = a.getBounds();
                     int vspan = (int) getPreferredSpan(Y_AXIS);
                     int hspan = (int) getPreferredSpan(X_AXIS);
-                    if (bounds.height != vspan)
-                    {
+                    if (bounds.height != vspan){
                         int slop = bounds.height - vspan;
                         bounds.y += slop / 2;
                         bounds.height -= slop;
                     }
-
                     horizontalAdjustments(hspan, bounds);
                     return bounds;
                 }
                 return null;
             }
 
-            private void horizontalAdjustments(int hspan, Rectangle bounds)
-            {
+            private void horizontalAdjustments(int hspan, Rectangle bounds){
                 Component c = getContainer();
-                if (c instanceof JTextField)
-                {
+                if (c instanceof JTextField){
                     JTextField field = (JTextField) c;
                     BoundedRangeModel vis = field.getHorizontalVisibility();
                     int max = Math.max(hspan, bounds.width);
                     int value = vis.getValue();
                     int extent = Math.min(max, bounds.width - 1);
-                    if ((value + extent) > max)
-                    {
+                    if ((value + extent) > max){
                         value = max - extent;
                     }
-                    vis.setRangeProperties(value, extent, vis.getMinimum(),
-                            max, false);
-                    if (hspan < bounds.width)
-                    {
+                    vis.setRangeProperties(value, extent, vis.getMinimum(), max, false);
+                    if (hspan < bounds.width){
                         // horizontally align the interior
                         int slop = bounds.width - 1 - hspan;
                         
                         int align = ((JTextField) c).getHorizontalAlignment();
                         
-                        if (align == LEADING)
-                        {
+                        if (align == LEADING){
                             align = LEFT;
-                        } else if (align == TRAILING)
-                        {
+                        } else if (align == TRAILING){
                             align = RIGHT;
                         }
                         
-                        switch (align)
-                        {
+                        switch (align){
                             case SwingConstants.CENTER:
                                 bounds.x += slop / 2;
                                 bounds.width -= slop;
@@ -135,8 +123,7 @@ public class PaletteFormattedTextFieldUI extends BasicFormattedTextFieldUI
                                 bounds.width -= slop;
                                 break;
                         }
-                    } else
-                    {
+                    } else{
                         // adjust the allocation to match the bounded range.
                         bounds.width = hspan;
                         bounds.x -= vis.getValue();
