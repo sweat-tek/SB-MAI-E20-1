@@ -164,7 +164,7 @@ public class BezierTool extends AbstractTool {
         return f;
     }
 
-    protected Figure getCreatedFigure() {
+    public Figure getCreatedFigure() {
         return createdFigure;
     }
 
