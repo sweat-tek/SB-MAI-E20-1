@@ -30,9 +30,7 @@ public class ThenBezierFigureIsCreated extends Stage<ThenBezierFigureIsCreated> 
     
     public ThenBezierFigureIsCreated thenBezierFigureIsCreated () {
         
-        //Get final figure and control that it is created 
-        Set<Figure> figureSet = defaultDrawingView.getSelectedFigures();
-        
+        //Get final figure and control that it is created        
         Iterator<Figure> figureIterator = defaultDrawingView.getSelectedFigures().iterator();
         BezierFigure finalFig = (BezierFigure) figureIterator.next();
 
@@ -49,5 +47,4 @@ public class ThenBezierFigureIsCreated extends Stage<ThenBezierFigureIsCreated> 
         
         return self();
     }
-    
 }

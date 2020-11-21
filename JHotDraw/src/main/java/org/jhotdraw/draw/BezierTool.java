@@ -53,7 +53,6 @@ public class BezierTool extends AbstractTool {
      * The created figure.
      */
     protected BezierFigure createdFigure;
-    protected BezierFigure lastFinalFigure;
     private int nodeCountBeforeDrag;
     /**
      * A localized name for this tool. The presentationName is displayed by the
@@ -297,8 +296,6 @@ public class BezierTool extends AbstractTool {
     protected void finishCreation(BezierFigure createdFigure, DrawingView creationView) {
         fireUndoEvent(createdFigure, creationView);
         creationView.addToSelection(createdFigure);
-        
-        lastFinalFigure = createdFigure;
         if (isToolDoneAfterCreation) {
             fireToolDone();
         }

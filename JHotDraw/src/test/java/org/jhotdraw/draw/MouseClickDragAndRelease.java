@@ -48,7 +48,7 @@ public class MouseClickDragAndRelease extends Stage<MouseClickDragAndRelease> {
 
     private void givenMouseDragged() {
         for (int i = 0; i < 10; i++) {
-            xAxis = 137 + (i * 10);
+            xAxis = 160 + (i * 10);
             beziertool.mouseDragged(getMouseEvent(xAxis, yAxis));
         }
         

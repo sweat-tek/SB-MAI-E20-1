@@ -25,7 +25,7 @@ public class GivenActiveBezierTool extends Stage<GivenActiveBezierTool> {
     @ProvidedScenarioState
     DefaultDrawingView defaultDrawingView;
     @ProvidedScenarioState
-    int xAxis = 127;
+    int xAxis = 150;
     @ProvidedScenarioState
     int yAxis = 408;
     

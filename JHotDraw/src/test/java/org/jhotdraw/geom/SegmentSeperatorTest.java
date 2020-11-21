@@ -45,24 +45,21 @@ public class SegmentSeperatorTest {
      */
     
     @Test
-    public void testLineToOrQuadto_4args_1() {
-        System.out.println("lineToOrQuadto");
+    public void testLineToOrQuadto() {
         float[] coords = {297.0f, 413.0f,0f,0f,0f};
         BezierPath.Node current = new BezierPath.Node(670.0, 433.4);
         int numCoords = 0;
         int type = 0;
         SegmentSeperator instance = new SegmentSeperator();
         instance.lineToOrQuadto(coords, current, numCoords, type);
-        assertEquals(1, instance.getType());
-        
+        assertEquals(1, instance.getType());  
     } 
     /**
      * Test of quadtoOrCubicto method, of class SegmentSeperator.
      */
     
     @Test
-    public void testQuadtoOrCubicto_5args_1() {
-        System.out.println("quadtoOrCubicto");
+    public void testQuadtoOrCubicto() {
         float[] coords = {297.0f, 413.0f,0f,0f,0f};;
         BezierPath.Node current = new BezierPath.Node(1109.3999999999999, 633.6);
         BezierPath.Node previous = new BezierPath.Node(1092.7, 674.8);;
