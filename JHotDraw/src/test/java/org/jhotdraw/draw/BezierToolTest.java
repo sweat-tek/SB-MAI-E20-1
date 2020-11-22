@@ -13,6 +13,12 @@ import static org.junit.Assert.*;
 /**
  *
  * @author Ryge
+ * 
+ * The reason I chose to test this particular class is because it's the simplest 
+ * implementation of figure that I could find, that didn't already extend BezierFigure. 
+ * 
+ * I could have tested any other type of figure, but I think ultimately would have to test
+ * BezierTool anyway. 
  */
 public class BezierToolTest {
     
