@@ -171,6 +171,10 @@ public class BezierTool extends AbstractTool {
     protected Figure getAddedFigure() {
         return createdFigure;
     }
+    
+    protected BezierFigure getLastFigure(){
+        return createdFigure;
+    }
 
     protected void addPointToFigure(Point2D.Double newPoint) {
         int pointCount = createdFigure.getNodeCount();
@@ -270,6 +274,7 @@ public class BezierTool extends AbstractTool {
             if (createdFigure.getNodeCount() > 1) {
                 finishCreation(createdFigure, creationView);
                 createdFigure = null;
+                
                 finishWhenMouseReleased = null;
                 return;
             }

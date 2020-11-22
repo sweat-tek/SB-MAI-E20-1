@@ -5,14 +5,14 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ figure-palette ]
+    branches: [ undo-redo ]
   pull_request:
-    branches: [ master ]
+    branches: [ undo-redo ]
+
 
 jobs:
   build:
-
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -22,5 +22,5 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file JHotDraw/pom.xml
-    - name: Run the tests
+    - name: test some stuff
       run: mvn -B test --file JHotDraw/pom.xml

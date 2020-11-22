@@ -14,7 +14,6 @@
 package org.jhotdraw.draw;
 
 import org.jhotdraw.beans.AbstractBean;
-import org.jhotdraw.util.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -23,7 +22,6 @@ import java.awt.geom.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.undo.*;
-import java.io.*;
 import org.jhotdraw.geom.*;
 
 /**
