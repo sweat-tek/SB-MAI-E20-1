@@ -86,7 +86,6 @@ public abstract class SVGAttributedFigure extends AbstractAttributedFigure {
             savedTransform = g.getTransform();
             g.transform(TRANSFORM.get(this));
         }
-        
         Paint paint = SVGAttributeKeys.getFillPaint(this);
         if (paint != null) {
             g.setPaint(paint);
@@ -102,6 +101,75 @@ public abstract class SVGAttributedFigure extends AbstractAttributedFigure {
             g.setTransform(savedTransform);
         }
     }
+
+    public Rectangle2D.Double getDrawingArea(Rectangle2D.Double cachedDrawingArea) {
+        if (cachedDrawingArea == null) {
+            Rectangle2D rx = getBounds();
+            Rectangle2D.Double r = (rx instanceof Rectangle2D.Double) ?
+                    (Rectangle2D.Double) rx :
+                    new Rectangle2D.Double(rx.getX(), rx.getY(), rx.getWidth(), rx.getHeight());
+            double g = SVGAttributeKeys.getPerpendicularHitGrowth(this);
+            Geom.grow(r, g, g);
+            if (TRANSFORM.get(this) == null) {
+                cachedDrawingArea = r;
+            } else {
+                cachedDrawingArea = new Rectangle2D.Double();
+                cachedDrawingArea.setRect(TRANSFORM.get(this).createTransformedShape(r).getBounds2D());
+            }
+        }
+        return (Rectangle2D.Double) cachedDrawingArea.clone();
+    }
+
+    public void gradient(AffineTransform tx) {
+        if (FILL_GRADIENT.get(this) != null &&
+                ! FILL_GRADIENT.get(this).isRelativeToFigureBounds()) {
+            Gradient g = FILL_GRADIENT.getClone(this);
+            g.transform(tx);
+            FILL_GRADIENT.basicSet(this, g);
+        }
+        if (STROKE_GRADIENT.get(this) != null &&
+                ! STROKE_GRADIENT.get(this).isRelativeToFigureBounds()) {
+            Gradient g = STROKE_GRADIENT.getClone(this);
+            g.transform(tx);
+            STROKE_GRADIENT.basicSet(this, g);
+        }
+    }
+
+    public float getFontSize() {
+        //   return FONT_SIZE.get(this).floatValue();
+        Point2D.Double p = new Point2D.Double(0, FONT_SIZE.get(this));
+        AffineTransform tx =  TRANSFORM.get(this);
+        if (tx != null) {
+            tx.transform(p, p);
+            Point2D.Double p0 = new Point2D.Double(0, 0);
+            tx.transform(p0, p0);
+            p.y -= p0.y;
+                /*
+            try {
+                tx.inverseTransform(p, p);
+            } catch (NoninvertibleTransformException ex) {
+                ex.printStackTrace();
+            }*/
+        }
+        return (float) Math.abs(p.y);
+    }
+
+    public void setFontSize(float size) {
+        Point2D.Double p = new Point2D.Double(0, size);
+        AffineTransform tx = TRANSFORM.get(this);
+        if (tx != null) {
+            try {
+                tx.inverseTransform(p, p);
+                Point2D.Double p0 = new Point2D.Double(0, 0);
+                tx.inverseTransform(p0, p0);
+                p.y -= p0.y;
+            } catch (NoninvertibleTransformException ex) {
+                ex.printStackTrace();
+            }
+        }
+        FONT_SIZE.set(this, Math.abs(p.y));
+    }
+
     @Override
     public <T> void setAttribute(AttributeKey<T> key, T newValue) {
         if (key == TRANSFORM) {

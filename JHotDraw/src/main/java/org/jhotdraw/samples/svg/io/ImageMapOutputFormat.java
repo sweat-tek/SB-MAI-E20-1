@@ -336,6 +336,7 @@ public class ImageMapOutputFormat implements OutputFormat {
                 !i.isDone(); i.next()) {
             switch (i.currentSegment(coords)) {
                 case PathIterator.SEG_MOVETO:
+                    System.out.println("Seq Moveto");
                     if (buf.length() != 0) {
                         throw new IllegalArgumentException("Illegal shape " + shape);
                     }
@@ -348,6 +349,7 @@ public class ImageMapOutputFormat implements OutputFormat {
                     path.moveTo(coords[0], coords[1]);
                     break;
                 case PathIterator.SEG_LINETO:
+                    System.out.println("Seq Lineto");
                     if (buf.length() != 0) {
                         buf.append(',');
                     }
@@ -357,6 +359,7 @@ public class ImageMapOutputFormat implements OutputFormat {
                     path.lineTo(coords[0], coords[1]);
                     break;
                 case PathIterator.SEG_CLOSE:
+                    System.out.println("Seq close");
                     path.closePath();
                     break;
                 default:
