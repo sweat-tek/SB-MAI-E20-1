@@ -18,7 +18,6 @@ public class GivenAnImageFigure extends Stage<GivenAnImageFigure> {
     @ProvidedScenarioState
     SVGImageFigure image;
 
-    // create an imagefigure
     public GivenAnImageFigure SelectedImage() {
         this.image = new SVGImageFigure();
         return this;

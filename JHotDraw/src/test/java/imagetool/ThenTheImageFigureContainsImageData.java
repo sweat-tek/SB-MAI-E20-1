@@ -26,7 +26,8 @@ public class ThenTheImageFigureContainsImageData extends Stage<ThenTheImageFigur
     public ThenTheImageFigureContainsImageData imageIsAdded() {
 
         assertNotNull(image.getImageData());
-        //when the image is loaded then the image figure contains data. 
+        // it fail when its null so it check
+        //when the image is loaded then the image figure contains data.
         return this;
 
     }
