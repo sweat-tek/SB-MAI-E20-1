@@ -119,6 +119,9 @@ public class JDisclosureToolBar extends JToolBar {
 
         invalidate();
         Container parent = getParent();
+        // telling the program to stop if parent is equals null, but if it's not 
+        // equals null then the program should run smoothly.
+        assert parent != null;
         while (parent.getParent() != null && !parent.getParent().isValid()) {
             parent = parent.getParent();
         }
