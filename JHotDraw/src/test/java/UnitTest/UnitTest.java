@@ -19,27 +19,27 @@ import org.mockito.Mockito;
  * @author NidaBasaran
  */
 public class UnitTest {
-    private ToolsToolBar toolbar;
+    private ToolsToolBar toolBar;
     @Mock
     Component component;
 
     @Before
     public void setUp() {
-        this.toolbar = new ToolsToolBar();
+        this.toolBar = new ToolsToolBar();
         component = Mockito.mock(Component.class);
     }
 
     @Test
     public void testAddComponent() {
-        toolbar.add(component);
-        int components = toolbar.getComponentCount();
+        toolBar.add(component);
+        int components = toolBar.getComponentCount();
 
         assertNotEquals(components, 0);
         assertTrue(components > 0);
 
-        toolbar.removeAll();
+        toolBar.removeAll();
 
-        components = toolbar.getComponentCount();
+        components = toolBar.getComponentCount();
 
         assertEquals(components, 0);
     }
