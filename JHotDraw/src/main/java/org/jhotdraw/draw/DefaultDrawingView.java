@@ -1073,7 +1073,7 @@ public class DefaultDrawingView
             }
         });
     }
-
+    
     @FeatureEntryPoint(JHotDrawFeatures.BASIC_EDITING)
     public void duplicate() {
         Collection<Figure> sorted = getDrawing().sort(getSelectedFigures());
