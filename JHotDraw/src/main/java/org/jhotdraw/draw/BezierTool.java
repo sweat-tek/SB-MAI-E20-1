@@ -164,11 +164,15 @@ public class BezierTool extends AbstractTool {
         return f;
     }
 
-    protected Figure getCreatedFigure() {
+    public Figure getCreatedFigure() {
         return createdFigure;
     }
 
     protected Figure getAddedFigure() {
+        return createdFigure;
+    }
+    
+    protected BezierFigure getLastFigure(){
         return createdFigure;
     }
 
@@ -270,6 +274,7 @@ public class BezierTool extends AbstractTool {
             if (createdFigure.getNodeCount() > 1) {
                 finishCreation(createdFigure, creationView);
                 createdFigure = null;
+                
                 finishWhenMouseReleased = null;
                 return;
             }
