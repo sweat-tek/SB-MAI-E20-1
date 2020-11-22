@@ -14,16 +14,6 @@
 
 package org.jhotdraw.draw;
 
-import org.jhotdraw.util.*;
-import java.beans.*;
-import java.awt.*;
-import java.awt.geom.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.undo.*;
-import javax.swing.event.*;
-import java.io.*;
 import org.jhotdraw.geom.*;
 
 /**
