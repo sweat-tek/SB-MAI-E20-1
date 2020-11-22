@@ -2,116 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e19f316-0008-4d6b-84a3-d8e3c52d8c8f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dk_sdu_mmmi_featuretracer_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/application startup.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/automatic selection.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/canvas.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/ellipse tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/figure palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/fill palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/image tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/line tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/link palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/manage drawings.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/rectangle tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/scribble tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/stroke palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/text area tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/text tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/tool palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/undo redo.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/view palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.02.15.48.28/view source.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/application startup.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/automatic selection.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/canvas.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/ellipse tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/figure palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/fill palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/image tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/line tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/link palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/manage drawings.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/rectangle tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/scribble tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/selection tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/stroke palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/text area tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/text tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/tool palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/view palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.46.43/view source.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/align palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/application startup.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/automatic selection.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/canvas.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/ellipse tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/figure palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/fill palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/grouping.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/image tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/line tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/link palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/manage drawings.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/rectangle tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/scribble tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/selection tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/stroke palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/text area tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/text tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/tool palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.17.56.12/view palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/application startup.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/automatic selection.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/basic editing.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/canvas.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/ellipse tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/figure palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/fill palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/image tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/line tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/link palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/manage drawings.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/rectangle tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/scribble tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/selection tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/stroke palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/text area tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/text tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/tool palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/undo redo.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.34.06/view palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/align palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/application startup.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/automatic selection.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/canvas.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/ellipse tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/figure palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/fill palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/grouping.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/image tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/line tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/link palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/manage drawings.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/rectangle tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/scribble tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/selection tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/stroke palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/text area tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/text tool.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/tool palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/undo redo.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FeatureTraces/traces 2020.10.17.20.43.00/view palette.ftf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JHotDraw.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nbactions.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/jhotdraw/undo/CompositeEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jhotdraw/undo/CompositeEdit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jhotdraw/draw/AbstractFigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jhotdraw/draw/AbstractFigure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jhotdraw/draw/CompositeFigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jhotdraw/draw/CompositeFigure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jhotdraw/draw/CreationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jhotdraw/draw/CreationTool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,6 +111,8 @@
       <updated>1599206728897</updated>
       <workItem from="1599206732005" duration="1061000" />
       <workItem from="1605659758292" duration="655000" />
+      <workItem from="1606011886123" duration="1364000" />
+      <workItem from="1606051133543" duration="1610000" />
     </task>
     <servers />
   </component>
@@ -254,10 +152,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="598" y="276" key="SettingsEditor/0.0.2560.1400/-1920.538.1920.1040@0.0.2560.1400" timestamp="1599207462385" />
-    <state x="976" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1605659758498">
+    <state x="976" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1606051133220">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="976" y="524" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/-1920.538.1920.1040@0.0.2560.1400" timestamp="1605659758498" />
+    <state x="976" y="524" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/-1920.538.1920.1040@0.0.2560.1400" timestamp="1606051133220" />
     <state x="936" y="330" width="672" height="677" key="run.anything.popup" timestamp="1599207706578">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
