@@ -57,7 +57,10 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
      * This is used to perform faster hit testing.
      */
     private transient Shape cachedHitShape;
-    private final ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");;
+    /**
+     * This util is used to get labels from the resources.
+     */
+    private final ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
 
     /**
      * Creates a new instance.
@@ -417,7 +420,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    public AbstractAction createClosePathAction() {
+    private AbstractAction createClosePathAction() {
         return new AbstractAction(labels.getString("attribute.closePath.text")) {
             @FeatureEntryPoint(JHotDrawFeatures.LINE_TOOL)
             public void actionPerformed(ActionEvent evt) {
@@ -433,7 +436,6 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
 
     private AbstractAction createOpenPathAction() {
         return new AbstractAction(labels.getString("attribute.openPath.text")) {
-
             public void actionPerformed(ActionEvent evt) {
                 SVGPathFigure.this.willChange();
                 for (Figure child : getChildren()) {
@@ -447,11 +449,10 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
 
     private AbstractAction createFlattenTransformAction() {
         return new AbstractAction(labels.getString("edit.flattenTransform.text")) {
-
             @Override
             public void actionPerformed(ActionEvent evt) {
                 final Object restoreData = getTransformRestoreData();
-                UndoableEdit edit = createUndoableFlattenTransformAction(labels, restoreData);
+                UndoableEdit edit = createUndoableFlattenTransformAction(restoreData);
                 willChange();
                 flattenTransform();
                 changed();
@@ -460,7 +461,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    private AbstractUndoableEdit createUndoableFlattenTransformAction(ResourceBundleUtil labels, Object restoreData) {
+    private AbstractUndoableEdit createUndoableFlattenTransformAction(Object restoreData) {
         return new AbstractUndoableEdit() {
 
             @Override
