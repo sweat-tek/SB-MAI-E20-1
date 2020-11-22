@@ -314,3 +314,8 @@ $RECYCLE.BIN/
 
 FeatureTraces/
 nbactions.xml
+*.idea/
+
+*.iml
+
+*/nbproject/

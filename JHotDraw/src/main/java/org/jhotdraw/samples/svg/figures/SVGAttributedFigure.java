@@ -86,7 +86,6 @@ public abstract class SVGAttributedFigure extends AbstractAttributedFigure {
             savedTransform = g.getTransform();
             g.transform(TRANSFORM.get(this));
         }
-        
         Paint paint = SVGAttributeKeys.getFillPaint(this);
         if (paint != null) {
             g.setPaint(paint);
