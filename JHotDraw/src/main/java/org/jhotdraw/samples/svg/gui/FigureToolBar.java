@@ -230,7 +230,7 @@ public class FigureToolBar extends AbstractToolBar {
     }
 
     @Override
-    protected String getID() {
+    protected String getID() { //Potentially redundant method
         return "figure";
     }
 
