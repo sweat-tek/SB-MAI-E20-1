@@ -595,7 +595,11 @@ public class Geom {
             return null;
         }
     }
-
+    
+    public static Point2D.Double intersect(Point2D.Double a, Point2D.Double b, Point2D.Double c, Point2D.Double d) {
+        return intersect(a.x, a.y, b.x, b.y, c.x, c.y, d.x, d.y);
+    }
+    
     /**
      * Standard line intersection algorithm
      * Return the point of intersection if it exists, else null
@@ -651,7 +655,7 @@ public class Geom {
             return null;
         }
     }
-
+    
     public static Point2D.Double intersect(
             double xa, // line 1 point 1 x
             double ya, // line 1 point 1 y
