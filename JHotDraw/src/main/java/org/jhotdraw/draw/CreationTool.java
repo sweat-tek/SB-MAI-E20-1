@@ -94,8 +94,8 @@ public class CreationTool extends AbstractTool {
     private boolean isToolDoneAfterCreation = true;
 
     /** Creates a new instance. */
-    public CreationTool(String prototypeClassName) {
-        this(prototypeClassName, null, null);
+    public CreationTool(String prototypeClassName) { 
+       this(prototypeClassName, null, null);
     }
 
     public CreationTool(String prototypeClassName, Map<AttributeKey, Object> attributes) {
