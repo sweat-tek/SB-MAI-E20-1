@@ -57,7 +57,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-
             <groupId>ch.ledcom.assertj-extensions</groupId>
             <artifactId>assertj-extensions</artifactId>
             <version>1.1</version>
@@ -78,4 +77,3 @@
         </dependency>
     </dependencies>   
 </project>
-
