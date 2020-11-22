@@ -20,6 +20,7 @@ import java.util.*;
 import java.io.*;
 import static org.jhotdraw.draw.AttributeKeys.*;
 import org.jhotdraw.geom.*;
+import org.jhotdraw.samples.svg.SVGAttributeKeys;
 import org.jhotdraw.xml.DOMInput;
 import org.jhotdraw.xml.DOMOutput;
 /**

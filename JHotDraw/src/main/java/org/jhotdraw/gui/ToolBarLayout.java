@@ -37,7 +37,7 @@ public class ToolBarLayout implements LayoutManager2, Serializable {
     /**
      * Specifies the axis of the layout.
      */
-    private int axis;
+    public int axis;
 
     /**
      * Creates a layout manager that will lay out components along the

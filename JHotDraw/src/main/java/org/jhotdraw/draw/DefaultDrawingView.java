@@ -1217,4 +1217,8 @@ public class DefaultDrawingView
     public Handle getActiveHandle() {
         return activeHandle;
     }
+    
+    public void setSelectedFigures(LinkedHashSet<Figure> selectedFigures) {
+        this.selectedFigures = selectedFigures;
+    }
 }

@@ -1,40 +1,39 @@
 /**
- * @(#)SelectionComponentRepainter.java  1.0  23.05.2008
- *
+ * @(#)SelectionComponentRepainter.java 1.0  23.05.2008
+ * <p>
  * Copyright (c) 2008 by the original authors of JHotDraw
  * and all its contributors.
  * All rights reserved.
- *
- * The copyright of this software is owned by the authors and  
- * contributors of the JHotDraw project ("the copyright holders").  
- * You may not use, copy or modify this software, except in  
- * accordance with the license agreement you entered into with  
- * the copyright holders. For details see accompanying license terms. 
+ * <p>
+ * The copyright of this software is owned by the authors and
+ * contributors of the JHotDraw project ("the copyright holders").
+ * You may not use, copy or modify this software, except in
+ * accordance with the license agreement you entered into with
+ * the copyright holders. For details see accompanying license terms.
  */
 package org.jhotdraw.draw.action;
 
-import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
-import java.beans.*;
-import javax.swing.*;
-import org.jhotdraw.app.JHotDrawFeatures;
 import org.jhotdraw.draw.*;
+
+import javax.swing.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * Calls repaint on components, which show attributes of the drawing editor
  * and of its views based on the current selection.
  *
  * @author Werner Randelshofer
- * @version 1.0 23.05.2008 Created.
+ *  @version 1.0 23.05.2008 Created.
  */
-public class SelectionComponentRepainter extends FigureAdapter
+public class SelectionComponentRepainter extends AbstractComponentRepainter
         implements PropertyChangeListener, FigureSelectionListener {
 
     private DrawingEditor editor;
-    private JComponent component;
 
     public SelectionComponentRepainter(DrawingEditor editor, JComponent component) {
+        super(component);
         this.editor = editor;
-        this.component = component;
         if (editor != null) {
             if (editor.getActiveView() != null) {
                 DrawingView view = editor.getActiveView();
@@ -49,49 +48,24 @@ public class SelectionComponentRepainter extends FigureAdapter
     }
 
     @Override
-    public void attributeChanged(FigureEvent evt) {
-        component.repaint();
+    protected void addListeners(DrawingView view) {
+        if (view == null) return;
+        view.addPropertyChangeListener(this);
+        view.addFigureSelectionListener(this);
+        if (view.getDrawing() == null) return;
+        view.getDrawing().addFigureListener(this);
     }
 
-    public void propertyChange(PropertyChangeEvent evt) {
-        String name = evt.getPropertyName();
-        if (name == DrawingEditor.ACTIVE_VIEW_PROPERTY) {
-            DrawingView view = (DrawingView) evt.getOldValue();
-            if (view != null) {
-                view.removePropertyChangeListener(this);
-                view.removeFigureSelectionListener(this);
-                if (view.getDrawing() != null) {
-                    view.getDrawing().removeFigureListener(this);
-                }
-            }
-            view = (DrawingView) evt.getNewValue();
-            if (view != null) {
-                view.addPropertyChangeListener(this);
-                view.addFigureSelectionListener(this);
-                if (view.getDrawing() != null) {
-                    view.getDrawing().addFigureListener(this);
-                }
-            }
-            component.repaint();
-        } else if (name == DrawingView.DRAWING_PROPERTY) {
-            Drawing drawing = (Drawing) evt.getOldValue();
-            if (drawing != null) {
-                drawing.removeFigureListener(this);
-            }
-            drawing = (Drawing) evt.getNewValue();
-            if (drawing != null) {
-                drawing.addFigureListener(this);
-            }
-            component.repaint();
-        } else {
-            component.repaint();
-        }
+    @Override
+    protected void removeListeners(DrawingView view) {
+        if (view == null) return;
+        view.removePropertyChangeListener(this);
+        view.removeFigureSelectionListener(this);
+        if (view.getDrawing() == null) return;
+        view.getDrawing().removeFigureListener(this);
     }
 
-    public void selectionChanged(FigureSelectionEvent evt) {
-        component.repaint();
-    }
-
+    @Override
     public void dispose() {
         if (editor != null) {
             if (editor.getActiveView() != null) {
@@ -105,7 +79,11 @@ public class SelectionComponentRepainter extends FigureAdapter
             editor.removePropertyChangeListener(this);
             editor = null;
         }
-        component = null;
+        setComponent(null);
+    }
+
+    public void selectionChanged(FigureSelectionEvent evt) {
+        getComponent().repaint();
     }
 }
 
