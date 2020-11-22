@@ -69,7 +69,7 @@ public class TextAreaParagraphDimensionTest {
         Rectangle2D.Double paragraphBounds = new Paragraph(
                                     shape, as.getIterator(),
                                     verticalPos, maxVerticalPos, leftMargin, rightMargin, tabStops, tabCount, fontRenderContext).getParagraph();
-        //assertEquals("Dimensions of paragraph should be:", paragraphBounds, new Rectangle2D.Double(350.0,2.0,28.470703125,12.251953125));
+        assertEquals("Dimensions of paragraph should be:", paragraphBounds, new Rectangle2D.Double(350.0,2.0,28.470703125,12.251953125));
     }
     @Test
     public void OpaTest(){
