@@ -57,6 +57,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
      * This is used to perform faster hit testing.
      */
     private transient Shape cachedHitShape;
+    private final ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");;
 
     /**
      * Creates a new instance.
@@ -114,7 +115,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
 
     public void drawFigure(Graphics2D g) {
         AffineTransform savedTransform = null;
-        if (TRANSFORM.get(this) != null) {
+        if (!isTransformAttributeNull()) {
             savedTransform = g.getTransform();
             g.transform(TRANSFORM.get(this));
         }
@@ -129,7 +130,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
             g.setStroke(SVGAttributeKeys.getStroke(this));
             drawStroke(g);
         }
-        if (TRANSFORM.get(this) != null) {
+        if (!isTransformAttributeNull()) {
             g.setTransform(savedTransform);
         }
     }
@@ -189,7 +190,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
             }
             GeneralPath gp = (GeneralPath) getPath();
             Rectangle2D strokeRect = new Rectangle2D.Double(0, 0, width, width);
-            if (TRANSFORM.get(this) != null) {
+            if (!isTransformAttributeNull()) {
                 gp = (GeneralPath) gp.clone();
                 gp.transform(TRANSFORM.get(this));
                 strokeRect = TRANSFORM.get(this).createTransformedShape(strokeRect).getBounds2D();
@@ -214,10 +215,10 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
 
     public boolean contains(Point2D.Double p) {
         getPath();
-        if (TRANSFORM.get(this) != null) {
+        if (!isTransformAttributeNull()) {
             p = getInverseTransform(p);
         }
-        boolean isClosed = CLOSED.get(getChild(0));
+        boolean isClosed = isChildClosed(0);
         if (isClosed && FILL_COLOR.get(this) == null && FILL_GRADIENT.get(this) == null) {
             return getHitShape().contains(p);
         }
@@ -261,9 +262,9 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
     }
 
     public void transform(AffineTransform tx) {
-        if (TRANSFORM.get(this) != null ||
+        if (!isTransformAttributeNull() ||
                 (tx.getType() & (AffineTransform.TYPE_TRANSLATION)) != tx.getType()) {
-            if (TRANSFORM.get(this) == null) {
+            if (isTransformAttributeNull()) {
                 TRANSFORM.basicSetClone(this, tx);
             } else {
                 AffineTransform t = TRANSFORM.getClone(this);
@@ -359,26 +360,41 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
 
     @Override
     public Collection<Action> getActions(Point2D.Double p) {
-        final ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
         LinkedList<Action> actions = new LinkedList<Action>();
-        if (TRANSFORM.get(this) != null) {
-            actions.add(createRemoveTransformAction(labels));
-            actions.add(createFlattenTransformAction(labels));
+        if (!isTransformAttributeNull()) {
+            actions.add(createRemoveTransformAction());
+            actions.add(createFlattenTransformAction());
         }
-        if (CLOSED.get(getChild(getChildCount() - 1))) {
-            actions.add(createOpenPathAction(labels));
+        if (isLastChildClosed()) {
+            actions.add(createOpenPathAction());
         } else {
-            actions.add(createClosePathAction(labels));
+            actions.add(createClosePathAction());
         }
-        if (WINDING_RULE.get(this) != WindingRule.EVEN_ODD) {
-            actions.add(createWindingRuleEvenOddAction(labels));
+        if (!isWindingRuleEvenOdd()) {
+            actions.add(createWindingRuleEvenOddAction());
         } else {
-            actions.add(createWindingRuleNonZeroAction(labels));
+            actions.add(createWindingRuleNonZeroAction());
         }
         return actions;
     }
 
-    private AbstractAction createWindingRuleNonZeroAction(ResourceBundleUtil labels) {
+    private boolean isWindingRuleEvenOdd() {
+        return WINDING_RULE.get(this) == WindingRule.EVEN_ODD;
+    }
+
+    private Boolean isLastChildClosed() {
+        return isChildClosed(getChildCount() - 1);
+    }
+
+    private Boolean isChildClosed(int i) {
+        return CLOSED.get(getChild(i));
+    }
+
+    private boolean isTransformAttributeNull() {
+        return TRANSFORM.get(this) == null;
+    }
+
+    private AbstractAction createWindingRuleNonZeroAction() {
         return new AbstractAction(labels.getString("attribute.windingRule.nonZero.text")) {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -389,7 +405,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    private AbstractAction createWindingRuleEvenOddAction(ResourceBundleUtil labels) {
+    private AbstractAction createWindingRuleEvenOddAction() {
         return new AbstractAction(labels.getString("attribute.windingRule.evenOdd.text")) {
             @FeatureEntryPoint(JHotDrawFeatures.LINE_TOOL)
             public void actionPerformed(ActionEvent evt) {
@@ -401,7 +417,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    public AbstractAction createClosePathAction(ResourceBundleUtil labels) {
+    public AbstractAction createClosePathAction() {
         return new AbstractAction(labels.getString("attribute.closePath.text")) {
             @FeatureEntryPoint(JHotDrawFeatures.LINE_TOOL)
             public void actionPerformed(ActionEvent evt) {
@@ -415,7 +431,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    private AbstractAction createOpenPathAction(ResourceBundleUtil labels) {
+    private AbstractAction createOpenPathAction() {
         return new AbstractAction(labels.getString("attribute.openPath.text")) {
 
             public void actionPerformed(ActionEvent evt) {
@@ -429,7 +445,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    private AbstractAction createFlattenTransformAction(ResourceBundleUtil labels) {
+    private AbstractAction createFlattenTransformAction() {
         return new AbstractAction(labels.getString("edit.flattenTransform.text")) {
 
             @Override
@@ -471,7 +487,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
         };
     }
 
-    private AbstractAction createRemoveTransformAction(ResourceBundleUtil labels) {
+    private AbstractAction createRemoveTransformAction() {
         return new AbstractAction(labels.getString("edit.removeTransform.text")) {
 
             public void actionPerformed(ActionEvent evt) {
