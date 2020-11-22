@@ -83,23 +83,6 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
         return (Rectangle2D.Double) bounds.clone();
     }
 
-    @Override
-    public Rectangle2D.Double getDrawingArea() {
-        if (cachedDrawingArea == null) {
-            Rectangle2D rx = getBounds();
-            Rectangle2D.Double r = (rx instanceof Rectangle2D.Double) ? (Rectangle2D.Double) rx : new Rectangle2D.Double(rx.getX(), rx.getY(), rx.getWidth(), rx.getHeight());
-            double g = SVGAttributeKeys.getPerpendicularHitGrowth(this);
-            Geom.grow(r, g, g);
-            if (TRANSFORM.get(this) == null) {
-                cachedDrawingArea = r;
-            } else {
-                cachedDrawingArea = new Rectangle2D.Double();
-                cachedDrawingArea.setRect(TRANSFORM.get(this).createTransformedShape(r).getBounds2D());
-            }
-        }
-        return (Rectangle2D.Double) cachedDrawingArea.clone();
-    }
-
     /**
      * Checks if a Point2D.Double is inside the figure.
      */
@@ -333,18 +316,7 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
             setBounds(
                     (Point2D.Double) tx.transform(anchor, anchor),
                     (Point2D.Double) tx.transform(lead, lead));
-            if (FILL_GRADIENT.get(this) != null &&
-                    !FILL_GRADIENT.get(this).isRelativeToFigureBounds()) {
-                Gradient g = FILL_GRADIENT.getClone(this);
-                g.transform(tx);
-                FILL_GRADIENT.basicSet(this, g);
-            }
-            if (STROKE_GRADIENT.get(this) != null &&
-                    !STROKE_GRADIENT.get(this).isRelativeToFigureBounds()) {
-                Gradient g = STROKE_GRADIENT.getClone(this);
-                g.transform(tx);
-                STROKE_GRADIENT.basicSet(this, g);
-            }
+            super.gradient(tx);
         }
         invalidate();
     }
@@ -431,40 +403,6 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
     //  return FILL_COLOR.get(this);
     }
 
-    public void setFontSize(float size) {
-        Point2D.Double p = new Point2D.Double(0, size);
-        AffineTransform tx = TRANSFORM.get(this);
-        if (tx != null) {
-            try {
-                tx.inverseTransform(p, p);
-                Point2D.Double p0 = new Point2D.Double(0, 0);
-                tx.inverseTransform(p0, p0);
-                p.y -= p0.y;
-            } catch (NoninvertibleTransformException ex) {
-                ex.printStackTrace();
-            }
-        }
-        FONT_SIZE.set(this, Math.abs(p.y));
-    }
-
-    public float getFontSize() {
-        Point2D.Double p = new Point2D.Double(0, FONT_SIZE.get(this));
-        AffineTransform tx = TRANSFORM.get(this);
-        if (tx != null) {
-            tx.transform(p, p);
-            Point2D.Double p0 = new Point2D.Double(0, 0);
-            tx.transform(p0, p0);
-            p.y -= p0.y;
-        /*
-        try {
-        tx.inverseTransform(p, p);
-        } catch (NoninvertibleTransformException ex) {
-        ex.printStackTrace();
-        }*/
-        }
-        return (float) Math.abs(p.y);
-    }
-// EDITING
 
     public boolean isEditable() {
         return editable;
