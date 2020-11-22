@@ -11,7 +11,6 @@
  * accordance with the license agreement you entered into with  
  * the copyright holders. For details see accompanying license terms. 
  */
-
 package org.jhotdraw.app.action;
 
 import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
@@ -26,13 +25,16 @@ import org.jhotdraw.app.View;
 /**
  * Closes a view.
  *
- * @author  Werner Randelshofer
- * @version 1.0  04 January 2005  Created.
+ * @author Werner Randelshofer
+ * @version 1.0 04 January 2005 Created.
  */
 public class CloseAction extends AbstractSaveBeforeAction {
+
     public final static String ID = "file.close";
-    
-    /** Creates a new instance. */
+
+    /**
+     * Creates a new instance.
+     */
     public CloseAction(Application app) {
         super(app);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
@@ -40,7 +42,10 @@ public class CloseAction extends AbstractSaveBeforeAction {
     }
 
     @FeatureEntryPoint(JHotDrawFeatures.MANAGE_DRAWINGS)
-    @Override protected void doIt(View view) {
+    @Override
+    public void doIt(View view) {
+        // view = null; // if the view is null there will be no presentation.
+        // assert view == null; // assert testing, actually best to test with == as it will not run the program if view is null.
         if (view != null && view.getApplication() != null) {
             view.getApplication().
                     dispose(view);
