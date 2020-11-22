@@ -1,4 +1,3 @@
-
 package viewPaletteAcceptanceTest;
 
 import com.tngtech.jgiven.Stage;
@@ -14,14 +13,11 @@ public class GivenCanvas extends Stage<GivenCanvas> {
     @ProvidedScenarioState
     DefaultDrawingEditor editor;
     
-    public GivenCanvas aCanvasIsCreated(){
+    public GivenCanvas aViewIsCreated(){
         editor = new DefaultDrawingEditor();
         DrawingView view = new DefaultDrawingView();
         view.setDrawing(new QuadTreeDrawing());
         editor.setActiveView(view);
         return this;
     }
-    
-    
-    
 }

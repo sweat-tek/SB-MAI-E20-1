@@ -1,7 +1,8 @@
 package viewPaletteAcceptanceTest;
 
 import com.tngtech.jgiven.Stage;
-import com.tngtech.jgiven.annotation.ExpectedScenarioState;
+import com.tngtech.jgiven.annotation.ProvidedScenarioState;
+import org.jhotdraw.draw.GridConstrainer;
 
 /**
  *
@@ -9,10 +10,10 @@ import com.tngtech.jgiven.annotation.ExpectedScenarioState;
  */
 public class WhenGridSelected extends Stage<WhenGridSelected> {
     
-    @ExpectedScenarioState
-    private DefaultDrawingEditor editor;
+    @ProvidedScenarioState
+    GridConstrainer grid = new GridConstrainer();
     
-    public whenGridIsSelected(){
-        
+    public void gridIsSelected(){
+        grid.setVisible(true);
     }
 }

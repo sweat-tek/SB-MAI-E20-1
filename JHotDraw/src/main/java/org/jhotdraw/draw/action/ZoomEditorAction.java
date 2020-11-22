@@ -38,7 +38,6 @@ public class ZoomEditorAction extends AbstractDrawingEditorAction {
      */
     public ZoomEditorAction(DrawingEditor editor, double scaleFactor, AbstractButton button) {
         this(editor, scaleFactor, button, true);
-        
     }
     /**
      * Creates a new instance.

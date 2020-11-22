@@ -1,21 +1,21 @@
 package viewPaletteAcceptanceTest;
 
 import org.junit.Test;
-
+import com.tngtech.jgiven.junit.ScenarioTest;
 
 /**
  *
  * @author emili
  */
-public class viewPaletteAcceptanceTest {
+public class ZoomAcceptanceTest extends ScenarioTest<GivenCanvas, WhenZoom, ThenZoom> {
     
     @Test
-    public void vewPaletteAcceptanceTest(){
-        //As an end user I want to be able to add a grid to the canvas as well as zoom in and out,
-        //so that it will be easier to see and align objects if needed.
+    public void ZoomAcceptanceTest(){
+        //As an end user I want to be able to zoom in and out,
+        //so that it will be easier to see objects if needed.
         
-        given().aCanvasIsCreated();
-        when().gridIsSelected();
+        given().aViewIsCreated();
+        when().zoomIsChanged();
+        then().zoomHappens();
     }
-    
 }
