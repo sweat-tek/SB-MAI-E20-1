@@ -12,15 +12,15 @@ import org.junit.Test;
  *
  * @author NidaBasaran
  */
-public class DisplayAcceptanceTest extends ScenarioTest <GivenIAmAUserOfJHotDraw, WhenIStartJHotDraw, ThenTheToolPaletteShouldBeDisplayed> {
-    
+public class DisplayAcceptanceTest extends ScenarioTest<GivenAToolBar, WhenAddAComponent, ThenToolBarHasComponents> {
+
     @Test
     public void display() {
-        
-        given().iAmAUserOfJHotDraw();
-        when().iStartJHotDraw();
-        then().thenTheToolPaletteShouldBeDisplayed();
-        
+
+        given().AToolbar();
+        when().addAComponent();
+        then().toolBarHasComponents();
+
     }
-    
+
 }
