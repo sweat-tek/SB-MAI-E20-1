@@ -75,8 +75,7 @@
             <artifactId>jgiven-junit</artifactId>
             <version>1.0.0-RC6</version>
             <type>jar</type>
-            <scope>test</scope>
-            <type>jar</type>           
+            <scope>test</scope>        
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
