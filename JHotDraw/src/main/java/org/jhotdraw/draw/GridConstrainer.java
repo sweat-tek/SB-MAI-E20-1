@@ -126,26 +126,27 @@ public class GridConstrainer extends AbstractConstrainer {
     public double getTheta() {
         return theta;
     }
-
+    
+    private void changeFireProperty(String parameterToChange, double oldValue, double newValue){
+        firePropertyChange(parameterToChange, oldValue, newValue);
+        fireStateChanged();
+    }
     public void setWidth(double newValue) {
         double oldValue = width;
         width = newValue;
-        firePropertyChange("width", oldValue, newValue);
-        fireStateChanged();
+        changeFireProperty("width", oldValue, newValue);
     }
 
     public void setHeight(double newValue) {
         double oldValue = height;
         height = newValue;
-        firePropertyChange("height", oldValue, newValue);
-        fireStateChanged();
+        changeFireProperty("height", oldValue, newValue);
     }
 
     public void setTheta(double newValue) {
         double oldValue = theta;
         theta = newValue;
-        firePropertyChange("theta", oldValue, newValue);
-        fireStateChanged();
+        changeFireProperty("theta", oldValue, newValue);
     }
 
     /**
@@ -381,8 +382,7 @@ public class GridConstrainer extends AbstractConstrainer {
     public void setMajorGridSpacing(int newValue) {
         int oldValue = majorGridSpacing;
         majorGridSpacing = newValue;
-        firePropertyChange("majorGridSpacing", oldValue, newValue);
-        fireStateChanged();
+        changeFireProperty("majorGridSpacing", (double) oldValue, (double) newValue);
     }
 
     public void draw(Graphics2D g, DrawingView view) {
