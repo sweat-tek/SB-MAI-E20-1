@@ -88,7 +88,7 @@ public class GivenFigure extends Stage<GivenFigure>
     GivenFigure aSelectedOpacity(double d)
     {
         opacityMap = new HashMap<>();
-        opacityMap.put(SVGAttributeKeys.OPACITY, d);
+        opacityMap.put(SVGAttributeKeys.FILL_OPACITY, d);
         return this;
     }
     

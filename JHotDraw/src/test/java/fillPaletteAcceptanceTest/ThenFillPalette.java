@@ -43,7 +43,7 @@ public class ThenFillPalette extends Stage<ThenFillPalette>
     {
         for (Figure f : editor.getActiveView().getSelectedFigures())
         {
-            assertEquals(f.getAttribute(SVGAttributeKeys.OPACITY), d, 0.01);
+            assertEquals(f.getAttribute(SVGAttributeKeys.FILL_OPACITY), d, 0.01);
         }
         
         return this;
