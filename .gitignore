@@ -16,6 +16,10 @@ local.properties
 .loadpath
 .recommenders
 
+.idea
+
+FeatureTraces
+
 # External tool builders
 .externalToolBuilders/
 
@@ -307,3 +311,11 @@ $RECYCLE.BIN/
 
 .classpath
 .project
+
+FeatureTraces/
+nbactions.xml
+*.idea/
+
+*.iml
+
+*/nbproject/
