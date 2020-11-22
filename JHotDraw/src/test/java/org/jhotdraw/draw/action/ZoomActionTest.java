@@ -1,16 +1,11 @@
 package org.jhotdraw.draw.action;
 
-import java.awt.Color;
-import java.util.HashMap;
-import org.jhotdraw.draw.AttributeKey;
 import org.jhotdraw.draw.AttributeKeys;
-import org.jhotdraw.draw.BezierFigure;
 import org.jhotdraw.draw.DefaultDrawing;
 import org.jhotdraw.draw.DefaultDrawingEditor;
 import org.jhotdraw.draw.DefaultDrawingView;
 import org.jhotdraw.draw.Drawing;
 import org.jhotdraw.draw.DrawingView;
-import org.jhotdraw.draw.Figure;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

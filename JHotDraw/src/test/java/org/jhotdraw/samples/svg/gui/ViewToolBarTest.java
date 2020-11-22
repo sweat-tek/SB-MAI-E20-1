@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.jhotdraw.samples.svg.gui;
 
-import java.awt.GridBagLayout;
+
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import org.jhotdraw.draw.AttributeKeys;
 import org.jhotdraw.draw.DefaultDrawing;
 import org.jhotdraw.draw.DefaultDrawingEditor;
 import org.jhotdraw.draw.DefaultDrawingView;
 import org.jhotdraw.draw.Drawing;
 import org.jhotdraw.draw.DrawingView;
-import org.jhotdraw.draw.action.EditorColorChooserAction;
 import org.jhotdraw.samples.svg.gui.ViewToolBar;
 import org.junit.After;
 import org.junit.AfterClass;

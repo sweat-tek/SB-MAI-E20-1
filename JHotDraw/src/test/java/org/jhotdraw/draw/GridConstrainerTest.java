@@ -1,22 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.jhotdraw.draw;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import javax.swing.plaf.FontUIResource;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import sun.java2d.SunGraphics2D;
 
 /**
  *
