@@ -17,11 +17,6 @@ package org.jhotdraw.app.action;
 import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.text.*;
-import java.beans.*;
-import java.util.*;
-import org.jhotdraw.util.*;
 import org.jhotdraw.app.EditableComponent;
 import org.jhotdraw.app.JHotDrawFeatures;
 
@@ -31,20 +26,19 @@ import org.jhotdraw.app.JHotDrawFeatures;
  * @author Werner Randelshofer.
  * @version 1.0 February 27, 2006 Created.
  */
-public class DuplicateAction extends AbstractAction {
+public class DuplicateAction extends AbstractEditingCommand {
     public final static String ID = "edit.duplicate";
     
     /** Creates a new instance. */
     public DuplicateAction() {
-        ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
-        labels.configureAction(this, ID);
+        super(ID);
+        //labels.configureAction(this, ID);
     }
 
     @FeatureEntryPoint(JHotDrawFeatures.BASIC_EDITING)
+    @Override
     public void actionPerformed(ActionEvent evt) {
-        Component focusOwner = KeyboardFocusManager.
-                getCurrentKeyboardFocusManager().
-                getPermanentFocusOwner();
+        Component focusOwner = getFocusOwner();
         if (focusOwner != null) {
             if (focusOwner instanceof EditableComponent) {
                 ((EditableComponent) focusOwner).duplicate();

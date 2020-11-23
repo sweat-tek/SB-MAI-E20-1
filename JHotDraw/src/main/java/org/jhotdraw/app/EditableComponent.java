@@ -45,4 +45,5 @@ public interface EditableComponent {
 	 * Selects nothing.
 	 */
 	public void clearSelection();
+        
 }

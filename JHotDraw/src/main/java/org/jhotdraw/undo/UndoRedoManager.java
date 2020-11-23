@@ -17,7 +17,6 @@ package org.jhotdraw.undo;
 import java.awt.event.*;
 import java.beans.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.undo.*;
 import java.util.*;
 import org.jhotdraw.util.*;

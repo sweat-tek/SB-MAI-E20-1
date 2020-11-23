@@ -311,9 +311,12 @@ $RECYCLE.BIN/
 
 .classpath
 .project
-<<<<<<< HEAD
-=======
 
->>>>>>> ScribbleTool
 FeatureTraces/
 nbactions.xml
+
+*.idea/
+
+*.iml
+
+*/nbproject/
