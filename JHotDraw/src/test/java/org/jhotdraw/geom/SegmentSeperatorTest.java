@@ -54,20 +54,41 @@ public class SegmentSeperatorTest {
         instance.lineToOrQuadto(coords, current, numCoords, type);
         assertEquals(1, instance.getType());  
     } 
+    @Test
+    public void testLineToOrQuadtoMinus() {
+        float[] coords = {-297.0f, -413.0f,0f,0f,0f};
+        BezierPath.Node current = new BezierPath.Node(-670.0, -433.4);
+        int numCoords = 0;
+        int type = 0;
+        SegmentSeperator instance = new SegmentSeperator();
+        instance.lineToOrQuadto(coords, current, numCoords, type);
+        assertEquals(1, instance.getType());  
+        assertArrayEquals(coords, instance.getFloatCoords(), 0);
+    } 
+    
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void LineToOrQuadtoOutOfBoundsTest() {
+        float[] coords = {-297.0f};
+        BezierPath.Node current = new BezierPath.Node(-670.0, -433.4);
+        int numCoords = 0;
+        int type = 0;
+        SegmentSeperator instance = new SegmentSeperator();
+        instance.lineToOrQuadto(coords, current, numCoords, type);
+    } 
+    
     /**
      * Test of quadtoOrCubicto method, of class SegmentSeperator.
      */
     
     @Test
     public void testQuadtoOrCubicto() {
-        float[] coords = {297.0f, 413.0f,0f,0f,0f};;
+        float[] coords = {297.0f, 413.0f,0f,0f,0f};
         BezierPath.Node current = new BezierPath.Node(1109.3999999999999, 633.6);
-        BezierPath.Node previous = new BezierPath.Node(1092.7, 674.8);;
+        BezierPath.Node previous = new BezierPath.Node(1092.7, 674.8);
         int numCoords = 0;
         int type = 0;
         SegmentSeperator instance = new SegmentSeperator();
         instance.quadtoOrCubicto(coords, current, previous, numCoords, type);
-        System.out.println("type: " + instance.getType());
         assertEquals(2, instance.getType());
     }
 }

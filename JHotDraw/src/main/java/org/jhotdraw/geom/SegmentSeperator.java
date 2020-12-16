@@ -11,10 +11,10 @@ import static java.awt.geom.PathIterator.SEG_QUADTO;
  */
 public class SegmentSeperator implements PathIterator {
 
-    float[] floatCoords;
-    double[] doubleCoords;
-    int numCoords;
-    int type;
+    private float[] floatCoords;
+    private double[] doubleCoords;
+    private int numCoords;
+    private int type;
 
     public SegmentSeperator() {
     }

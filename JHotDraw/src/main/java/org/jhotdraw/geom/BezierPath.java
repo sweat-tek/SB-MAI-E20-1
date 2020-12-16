@@ -161,7 +161,6 @@ public class BezierPath extends ArrayList<BezierPath.Node>
         }
         
         public Node (SubNode subnode1, SubNode subnode2 , SubNode subnode3){
-            System.out.println("This method is awesome");
             this.mask = subnode1.getMask();
             x[0] = subnode1.getX();
             y[0] = subnode1.getY();
